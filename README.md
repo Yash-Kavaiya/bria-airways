@@ -93,6 +93,14 @@ british-airways/
 6. **Access the website**
    - Open your browser and navigate to: `http://localhost:8080`
 
+## 📸 Screenshots
+
+### Website Overview
+![British Airways Website](/Images/website.png)
+
+### AI Chatbot Interface
+![Chatbot Interface](/Images/chatbot.png)
+
 ## 🔧 DialogFlow Configuration
 
 The chatbot integration requires a properly configured DialogFlow CX agent:
