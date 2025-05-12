@@ -210,15 +210,12 @@ def detect_intent_texts(agent, session_id, texts, language_code):
 
 ## 📊 System Architecture
 
-```mermaid
-graph TD
-    A[User Browser] -->|HTTP Request| B[Flask Web Server]
-    B -->|Render| C[HTML Templates]
-    B -->|API Call| D[DialogFlow CX]
-    D -->|Response| B
-    B -->|JSON Response| A
-    E[Static Assets] -->|Serve| A
-```
+
+![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
 
 ## 🔐 Security Considerations
 
