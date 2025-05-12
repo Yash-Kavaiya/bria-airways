@@ -646,8 +646,35 @@ h3 {
 
 /* App Download Section */
 .app-download {
+    background-color: #f8f9fa;
     padding: 60px 0;
-    background-color: var(--ba-white);
+    text-align: center;
+}
+
+.app-download h2 {
+    margin-bottom: 30px;
+    color: #1e4477;
+    font-size: 28px;
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.store-buttons a {
+    transition: transform 0.2s ease;
+}
+
+.store-buttons a:hover {
+    transform: scale(1.05);
+}
+
+.store-buttons img {
+    height: 50px;
+    width: auto;
 }
 
 .app-download .container {
