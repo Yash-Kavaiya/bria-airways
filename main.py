@@ -4,10 +4,20 @@ import json
 import uuid
 from datetime import datetime
 import dialogflow_api
+import logging
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
+app.config['JSONIFY_MIMETYPE'] = 'application/json'
+app.config['JSON_SORT_KEYS'] = False
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 global session_id
 session_id = uuid.uuid4()
+
 # Configuration
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'doc', 'docx', 'xls', 'xlsx'}
@@ -28,15 +38,30 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    data = request.json
-    message = data.get('message', '')
-    print(message)
-    print(data)
-    send_dialogflow_msg = dialogflow_api.run_sample([message],session_id)
-    print(send_dialogflow_msg)
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"error": "No data received"}), 400
 
-    # Return the response
-    return jsonify({"response": send_dialogflow_msg[0]})
+        message = data.get('message', '')
+        if not message:
+            return jsonify({"error": "No message provided"}), 400
+
+        # Log the incoming message for debugging
+        app.logger.info(f"Received message: {message}")
+        
+        # Send message to Dialogflow and get response
+        dialogflow_response = dialogflow_api.run_sample([message], session_id)
+        
+        if not dialogflow_response or not dialogflow_response[0]:
+            return jsonify({"error": "No response from Dialogflow"}), 500
+
+        # Return the response
+        return jsonify({"response": dialogflow_response[0]})
+
+    except Exception as e:
+        app.logger.error(f"Error in chat endpoint: {str(e)}")
+        return jsonify({"error": "Internal server error"}), 500
 
 # Route to handle file uploads (for actual file uploads in a real app)
 @app.route('/upload', methods=['POST'])

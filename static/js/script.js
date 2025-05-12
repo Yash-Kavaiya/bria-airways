@@ -310,76 +310,75 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to send message
     function sendMessage() {
         const message = chatInput.value.trim();
-        if (message === '' && !currentFile) return;
+        if (message === '' && !currentFile) {
+            return;
+        }
         
         // Add user message to chat
-        addMessage('user', message);
+        if (message) {
+            addMessage('user', message);
+        }
         
         // Clear input
         chatInput.value = '';
         
         // Handle the file if any
+        let fileData = null;
         if (currentFile) {
-            // In a real app, you'd handle file upload here
-            
-            // Clear the attachment UI
+            fileData = {
+                name: currentFile.name,
+                type: currentFile.type,
+                size: currentFile.size
+            };
+            // Clear the file input
             currentFile = null;
             fileInput.value = '';
             attachmentPreview.classList.add('hidden');
         }
         
         // Process the message
-        processMessage(message);
+        processMessage(message, fileData);
     }
     
-    // Process the message (simulate response)
-    function processMessage(message) {
+    // Process the message and get a response
+    function processMessage(message, fileData = null, isVoiceInput = false) {
         // Show typing indicator
         showTypingIndicator();
         
-        // Simulate processing time
-        setTimeout(() => {
+        // Prepare the data to send
+        const data = {
+            message: message || ''
+        };
+        
+        if (fileData) {
+            data.file = fileData;
+        }
+
+        // Send to server and get response
+        fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
             // Remove typing indicator
             removeTypingIndicator();
             
-            // Generate a response based on the message
-            const response = generateResponse(message);
-            
-            // Add bot response to chat
-            addMessage('bot', response);
-        }, 1500);
-    }
-    
-    // Function to generate a simple response
-    function generateResponse(message) {
-        message = message.toLowerCase();
-        
-        if (message.includes('flight') && (message.includes('book') || message.includes('reserve'))) {
-            return "I'd be happy to help you book a flight. You can use our booking tool at the top of the page, or I can guide you through the process. Where would you like to fly to?";
-        }
-        
-        if (message.includes('baggage') || message.includes('luggage')) {
-            return "For most British Airways flights, the standard baggage allowance is 23kg for checked bags in Economy, 32kg in Business/Club class, and 32kg in First class. You can check specific allowances for your flight on our website or in your booking confirmation.";
-        }
-        
-        if (message.includes('cancel') || message.includes('refund')) {
-            return "I understand you're inquiring about cancellations or refunds. Most British Airways bookings can be changed or cancelled online through the 'Manage My Booking' section on our website. The refund policy depends on your ticket type. Would you like me to provide more details?";
-        }
-        
-        if (message.includes('check in')) {
-            return "Online check-in opens 24 hours before your flight and closes 1 hour before departure. You can check in on our website or through the British Airways app. Would you like me to help you with the check-in process?";
-        }
-        
-        if (message.includes('avios') || message.includes('executive club') || message.includes('points')) {
-            return "The Executive Club is British Airways' loyalty program where you can earn Avios points when you fly with us or our partners. You can redeem these points for flights, upgrades, hotels, car rentals, and more. Would you like to know how to join or learn more about the program?";
-        }
-        
-        if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-            return "Hello! Welcome to British Airways. How can I assist you today?";
-        }
-        
-        // Default response
-        return "Thank you for your message. As a virtual assistant, I can help with flight bookings, baggage information, check-in procedures, and general queries about British Airways services. How can I assist you further?";
+            // Add the response to the chat
+            if (data.response) {
+                addMessage('assistant', data.response);
+            } else if (data.error) {
+                addMessage('assistant', 'Sorry, there was an error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            removeTypingIndicator();
+            addMessage('assistant', 'Sorry, there was an error processing your message.');
+        });
     }
     
     // Function to add message to chat
