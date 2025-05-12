@@ -35,6 +35,22 @@ def allowed_file(filename):
 @app.route('/')
 def home():
     return render_template('index.html')
+# Add these routes after your existing home route
+@app.route('/my-trips')
+def my_trips():
+    return render_template('my-trips.html')
+
+@app.route('/travel-information')
+def travel_information():
+    return render_template('travel-information.html')
+
+@app.route('/destinations')
+def destinations():
+    return render_template('destinations.html')
+
+@app.route('/executive-club')
+def executive_club():
+    return render_template('executive-club.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():

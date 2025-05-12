@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>British Airways - Fly to London, Europe, USA and The World</title>
+    <title>British Airways - My Trips</title>
     <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,8 +39,8 @@
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#" class="active">Book</a></li>
-                    <li><a href="/travel-information">My Trips</a></li>
+                    <li><a href="/">Book</a></li>
+                    <li><a href="/my-trips" class="active">My Trips</a></li>
                     <li><a href="/travel-information">Travel Information</a></li>
                     <li><a href="/destinations">Destinations</a></li>
                     <li><a href="/executive-club">Executive Club</a></li>
@@ -53,242 +53,122 @@
         </div>
     </header>
 
-    <!-- Hero Section with Booking Tool -->
-    <section class="hero" style="background-image: url('static/images/hero-london.jpg');">
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('static/images/my-trips-hero.jpg'); height: 400px;">
         <div class="container">
             <div class="booking-container">
                 <div class="booking-tabs">
-                    <button class="active">Book a Flight</button>
-                    <button>Manage My Booking</button>
+                    <button class="active">Manage My Booking</button>
                     <button>Check In</button>
                     <button>Flight Status</button>
                 </div>
                 <div class="booking-form">
-                    <div class="booking-options">
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type" checked>
-                            <span class="radio-label">Return</span>
-                        </label>
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type">
-                            <span class="radio-label">One way</span>
-                        </label>
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type">
-                            <span class="radio-label">Multi-city</span>
-                        </label>
-                    </div>
                     <div class="booking-row">
                         <div class="form-group">
-                            <label>From</label>
+                            <label>Booking Reference</label>
                             <div class="input-with-icon">
-                                <i class="fas fa-plane-departure"></i>
-                                <input type="text" placeholder="Airport or city">
+                                <i class="fas fa-ticket-alt"></i>
+                                <input type="text" placeholder="Enter your 6-character booking reference">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>To</label>
+                            <label>Last Name</label>
                             <div class="input-with-icon">
-                                <i class="fas fa-plane-arrival"></i>
-                                <input type="text" placeholder="Airport or city">
+                                <i class="fas fa-user"></i>
+                                <input type="text" placeholder="Enter your last name">
                             </div>
                         </div>
                     </div>
                     <div class="booking-row">
                         <div class="form-group">
-                            <label>Departure</label>
-                            <div class="input-with-icon">
-                                <i class="far fa-calendar-alt"></i>
-                                <input type="date">
-                            </div>
+                            <button class="search-flights-btn">Retrieve booking</button>
                         </div>
-                        <div class="form-group">
-                            <label>Return</label>
-                            <div class="input-with-icon">
-                                <i class="far fa-calendar-alt"></i>
-                                <input type="date">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="booking-row">
-                        <div class="form-group">
-                            <label>Passengers</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-user-friends"></i>
-                                <select>
-                                    <option>1 Adult, Economy</option>
-                                    <option>2 Adults, Economy</option>
-                                    <option>1 Adult, Business</option>
-                                    <option>1 Adult, 1 Child, Economy</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="search-flights-btn">Search flights</button>
-                        </div>
-                    </div>
-                    <div class="extra-options">
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkbox-label">Add a hotel</span>
-                        </label>
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkbox-label">Add a car</span>
-                        </label>
-                        <a href="#" class="promo-link">Add a promotion code</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Offers Section -->
-    <section class="offers">
+    <!-- My Trips Content -->
+    <section class="travel-planning" style="padding-top: 40px;">
         <div class="container">
-            <h2>Latest offers</h2>
-            <p class="section-intro">Explore our latest offers and find the perfect getaway for you. From city breaks to beach holidays, we have something for everyone.</p>
+            <h2>Manage your journey</h2>
+            <p class="section-intro">Access and modify your bookings, check in for your flights, and get real-time updates on your journey.</p>
             
-            <div class="offers-grid">
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/london-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>London breaks from £99</h3>
-                        <p>Experience the best of British culture with our London city break packages.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
+            <div class="planning-cards">
+                <div class="planning-card">
+                    <img src="static/images/check-in.jpg" alt="Check-in">
+                    <h3>Online Check-in</h3>
+                    <p>Check in online from 24 hours up to 1 hour before your flight departs.</p>
+                    <a href="#" class="btn-text">Check in now <i class="fas fa-chevron-right"></i></a>
                 </div>
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/newyork-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>New York from £349</h3>
-                        <p>Take a bite out of the Big Apple with our fantastic deals to New York.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
+                <div class="planning-card">
+                    <img src="static/images/flight-status.jpg" alt="Flight Status">
+                    <h3>Flight Status</h3>
+                    <p>Get the latest information about arrival and departure times.</p>
+                    <a href="#" class="btn-text">Check status <i class="fas fa-chevron-right"></i></a>
                 </div>
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/caribbean-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>Caribbean escapes from £499</h3>
-                        <p>Relax on pristine beaches with our exclusive Caribbean packages.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
+                <div class="planning-card">
+                    <img src="static/images/seat-selection.jpg" alt="Seat Selection">
+                    <h3>Seat Selection</h3>
+                    <p>Choose your preferred seat or change your seating arrangements.</p>
+                    <a href="#" class="btn-text">Select seats <i class="fas fa-chevron-right"></i></a>
                 </div>
-            </div>
-            
-            <div class="view-all-container">
-                <a href="#" class="view-all">View all offers <i class="fas fa-chevron-right"></i></a>
             </div>
         </div>
     </section>
 
-    <!-- Destinations Section -->
-    <section class="destinations">
+    <!-- Additional Options Section -->
+    <section class="experience" style="background-color: #fff;">
         <div class="container">
-            <h2>Popular destinations</h2>
-            
-            <div class="destination-tabs">
-                <button class="active">London</button>
-                <button>New York</button>
-                <button>Dubai</button>
-                <button>Singapore</button>
-                <button>Sydney</button>
-            </div>
-            
-            <div class="destination-content">
-                <div class="destination-info">
-                    <h3>London - The heart of Britain</h3>
-                    <p>Experience world-class museums, historic landmarks, and vibrant cultural scenes in the British capital. From Buckingham Palace to the London Eye, there's something for everyone in this iconic city.</p>
-                    <ul class="destination-highlights">
-                        <li><i class="fas fa-check"></i> Multiple daily flights</li>
-                        <li><i class="fas fa-check"></i> Direct service from 15+ US cities</li>
-                        <li><i class="fas fa-check"></i> Award-winning service</li>
-                    </ul>
-                    <a href="#" class="btn-primary">Flights to London</a>
-                </div>
-                <div class="destination-image" style="background-image: url('static/images/london-destination.jpg');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience">
-        <div class="container">
-            <h2>The British Airways experience</h2>
+            <h2>Additional booking options</h2>
             <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="experience-icon">
+                        <i class="fas fa-suitcase"></i>
+                    </div>
+                    <h3>Add Baggage</h3>
+                    <p>Purchase additional baggage allowance for your upcoming flight.</p>
+                    <a href="#">Add now</a>
+                </div>
                 <div class="experience-card">
                     <div class="experience-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <h3>Dining</h3>
-                    <p>Enjoy delicious meals created by top chefs, paired with a selection of fine wines and beverages.</p>
-                    <a href="#">Learn more</a>
+                    <h3>Special Meals</h3>
+                    <p>Request special dietary meals for your flight at least 24 hours before departure.</p>
+                    <a href="#">Select meal</a>
                 </div>
                 <div class="experience-card">
                     <div class="experience-icon">
-                        <i class="fas fa-couch"></i>
+                        <i class="fas fa-car"></i>
                     </div>
-                    <h3>Comfort</h3>
-                    <p>Relax in ergonomically designed seats with adjustable headrests and ample legroom.</p>
-                    <a href="#">Learn more</a>
+                    <h3>Add Car Rental</h3>
+                    <p>Book a car with our trusted partners for your destination.</p>
+                    <a href="#">Book now</a>
                 </div>
                 <div class="experience-card">
                     <div class="experience-icon">
-                        <i class="fas fa-film"></i>
+                        <i class="fas fa-hotel"></i>
                     </div>
-                    <h3>Entertainment</h3>
-                    <p>Access hundreds of movies, TV shows, music and games on your personal screen.</p>
-                    <a href="#">Learn more</a>
-                </div>
-                <div class="experience-card">
-                    <div class="experience-icon">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                    <h3>Wellbeing</h3>
-                    <p>Amenity kits with skincare products, comfortable bedding, and ambient cabin lighting.</p>
-                    <a href="#">Learn more</a>
+                    <h3>Add Hotel</h3>
+                    <p>Find the perfect accommodation to complement your journey.</p>
+                    <a href="#">Find hotels</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Travel Planning Section -->
-    <section class="travel-planning">
-        <div class="container">
-            <h2>Plan your journey</h2>
-            <div class="planning-cards">
-                <div class="planning-card">
-                    <img src="static/images/baggage.jpg" alt="Baggage Information">
-                    <h3>Baggage</h3>
-                    <p>Check baggage allowances and restrictions for your journey.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="planning-card">
-                    <img src="static/images/check-in.jpg" alt="Check-in Options">
-                    <h3>Check-in options</h3>
-                    <p>Check in online, on your mobile or at the airport.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="planning-card">
-                    <img src="static/images/travel-docs.jpg" alt="Travel Documents">
-                    <h3>Travel requirements</h3>
-                    <p>Check passport, visa and health requirements for your destination.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Loyalty Program -->
+    <!-- Travel Changes Section -->
     <section class="loyalty">
         <div class="container">
             <div class="loyalty-content">
-                <h2>Join the Executive Club</h2>
-                <p>Collect Avios when you fly with us and our partners. Spend them on rewards like flights, upgrades, car hire, hotels and more.</p>
-                <a href="#" class="btn-primary">Join for free</a>
+                <h2>Need to change your travel plans?</h2>
+                <p>We understand that plans can change. Modify your booking, request a refund, or find out about our flexible booking policy.</p>
+                <a href="#" class="btn-primary">View options</a>
             </div>
             <div class="loyalty-image">
-                <img src="static/images/executive-club.jpg" alt="British Airways Executive Club">
+                <img src="static/images/travel-changes.jpg" alt="Change Travel Plans">
             </div>
         </div>
     </section>
@@ -298,7 +178,7 @@
         <div class="container">
             <div class="app-content">
                 <h2>Download the British Airways app</h2>
-                <p>Book flights, check in, access your boarding pass and more with our convenient mobile app.</p>
+                <p>Manage your bookings on the go, access your boarding pass offline, and receive real-time flight notifications with our convenient mobile app.</p>
                 <div class="app-buttons">
                     <a href="#" class="app-button"><img src="static/images/app-store.png" alt="Download on App Store"></a>
                     <a href="#" class="app-button"><img src="static/images/google-play.png" alt="Get it on Google Play"></a>
@@ -396,7 +276,7 @@
                     <i class="fas fa-robot"></i>
                 </div>
                 <div class="message-content">
-                    <p>Hello! I'm your British Airways virtual assistant. How can I help you today?</p>
+                    <p>Hello! I'm your British Airways virtual assistant. How can I help you manage your booking today?</p>
                 </div>
             </div>
             <!-- More messages will be added here dynamically -->
