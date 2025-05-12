@@ -1,6 +1,12 @@
 # British Airways Website Clone 🛫✨
 
-![British Airways Logo](https://brandslogos.com/wp-content/uploads/images/large/british-airways-logo-1.png)
+## 📸 Screenshots
+
+### Website Overview
+![British Airways Website](/Images/website.png)
+
+### AI Chatbot Interface
+![Chatbot Interface](/Images/chatbot.png)
 
 ## 📋 Project Overview
 
@@ -93,13 +99,7 @@ british-airways/
 6. **Access the website**
    - Open your browser and navigate to: `http://localhost:8080`
 
-## 📸 Screenshots
 
-### Website Overview
-![British Airways Website](/Images/website.png)
-
-### AI Chatbot Interface
-![Chatbot Interface](/Images/chatbot.png)
 
 ## 🔧 DialogFlow Configuration
 
