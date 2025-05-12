@@ -30,11 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const attachmentName = document.getElementById('attachment-name');
     const removeAttachment = document.getElementById('remove-attachment');
     
+    // DOM Elements - Booking UI
+    const bookingTabs = document.querySelectorAll('.booking-tabs button');
+    const destinationTabs = document.querySelectorAll('.destination-tabs button');
+    
     // Speech Recognition Setup
     let recognition = null;
     let isRecording = false;
     let isPaused = false;
-    let recognitionTimeout = null;
     let currentFile = null;
     
     // Initialize Speech Recognition if available
@@ -58,19 +61,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Display transcription with highlighting
             transcriptionResult.innerHTML = `
-                <span class="text-gray-800 font-medium">${finalTranscript}</span>
-                <span class="text-gray-500 italic">${interimTranscript}</span>
+                <span class="text-dark font-weight-medium">${finalTranscript}</span>
+                <span class="text-muted font-italic">${interimTranscript}</span>
             `;
             
             // Enable send button if we have text
             if (finalTranscript.trim() !== '' || interimTranscript.trim() !== '') {
                 sendVoice.disabled = false;
-                sendVoice.classList.add('animate-pulse');
                 // Update status text
-                recordingStatus.innerHTML = 'Speech detected! <span class="text-google-green">✓</span>';
+                recordingStatus.innerHTML = 'Speech detected! <span style="color: var(--ba-navy);">✓</span>';
             } else {
                 sendVoice.disabled = true;
-                sendVoice.classList.remove('animate-pulse');
             }
         };
         
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateVoiceControls();
             
             // Show error in transcription area
-            transcriptionResult.innerHTML = `<span class="text-red-500">Error: ${event.error}. Please try again.</span>`;
+            transcriptionResult.innerHTML = `<span style="color: var(--ba-red);">Error: ${event.error}. Please try again.</span>`;
         };
     }
     
@@ -132,17 +133,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Reset the voice UI when opening
         resetVoiceUI();
-        
-        // Add recording status if it doesn't exist
-        if (!document.getElementById('recording-status')) {
-            const statusElement = document.createElement('div');
-            statusElement.id = 'recording-status';
-            statusElement.classList.add('text-center', 'text-sm', 'text-gray-600', 'mt-2');
-            statusElement.textContent = 'Click the microphone to start recording';
-            voicePopup.appendChild(statusElement);
-        } else {
-            document.getElementById('recording-status').textContent = 'Click the microphone to start recording';
-        }
         
         // Focus on start recording button for better accessibility
         setTimeout(() => {
@@ -212,11 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     startRecording.querySelector('i').className = 'fas fa-stop';
                     transcriptionResult.innerHTML = '';
                     sendVoice.disabled = true;
-                    sendVoice.classList.remove('animate-pulse');
                     
                     // Update recording status
                     if (recordingStatus) {
-                        recordingStatus.innerHTML = '<span class="text-google-red animate-pulse">●</span> Recording... speak now';
+                        recordingStatus.innerHTML = '<span style="color: var(--ba-red); animation: blink 1s infinite;">●</span> Recording... speak now';
                     }
                     
                     animateWaveform(true);
@@ -224,7 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } catch (e) {
                     console.error('Error starting recognition', e);
                     if (recordingStatus) {
-                        recordingStatus.innerHTML = '<span class="text-red-500">Error starting speech recognition. Please try again.</span>';
+                        recordingStatus.innerHTML = '<span style="color: var(--ba-red);">Error starting speech recognition. Please try again.</span>';
                         setTimeout(() => {
                             recordingStatus.textContent = 'Click the microphone to start recording';
                         }, 3000);
@@ -232,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } else {
                 if (recordingStatus) {
-                    recordingStatus.innerHTML = '<span class="text-red-500">Speech recognition is not supported in your browser.</span>';
+                    recordingStatus.innerHTML = '<span style="color: var(--ba-red);">Speech recognition is not supported in your browser.</span>';
                 }
             }
         } else {
@@ -249,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateVoiceControls();
             // Update status
             if (recordingStatus) {
-                recordingStatus.innerHTML = '<span class="text-yellow-500">⏸</span> Recording paused';
+                recordingStatus.innerHTML = '<span style="color: #e6c418;">⏸</span> Recording paused';
             }
         }
     });
@@ -263,12 +252,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateVoiceControls();
                 // Update status
                 if (recordingStatus) {
-                    recordingStatus.innerHTML = '<span class="text-google-red animate-pulse">●</span> Recording resumed... speak now';
+                    recordingStatus.innerHTML = '<span style="color: var(--ba-red); animation: blink 1s infinite;">●</span> Recording resumed... speak now';
                 }
             } catch (e) {
                 console.error('Error resuming recognition', e);
                 if (recordingStatus) {
-                    recordingStatus.innerHTML = '<span class="text-red-500">Error resuming recording. Please try again.</span>';
+                    recordingStatus.innerHTML = '<span style="color: var(--ba-red);">Error resuming recording. Please try again.</span>';
                 }
             }
         }
@@ -276,10 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     resetRecording.addEventListener('click', function() {
         resetVoiceUI();
-        // Play a subtle reset sound effect (optional)
-        // const audio = new Audio('/static/sounds/reset.mp3');
-        // audio.volume = 0.3;
-        // audio.play().catch(e => console.log('Audio play prevented: ', e));
     });
     
     sendVoice.addEventListener('click', function() {
@@ -287,15 +272,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (text) {
             // Show sending feedback
             sendVoice.disabled = true;
-            sendVoice.classList.remove('animate-pulse');
             if (recordingStatus) {
-                recordingStatus.innerHTML = '<span class="text-google-green animate-pulse">↑</span> Sending message...';
+                recordingStatus.innerHTML = '<span style="color: var(--ba-navy);">↑</span> Sending message...';
             }
             
             // Briefly show sending animation before closing
             setTimeout(() => {
                 // Add user message to chat
-                addMessage('user', text, 'voice');
+                addMessage('user', text);
                 
                 // Clear input and close popup
                 transcriptionResult.innerHTML = '';
@@ -304,8 +288,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 stopRecording();
                 resetVoiceUI();
                 
-                // Process the message with voice input flag
-                processMessage(text, null, true);
+                // Process the message (simulate response)
+                processMessage(text);
                 
                 // Return focus to chat input
                 chatInput.focus();
@@ -329,23 +313,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (message === '' && !currentFile) return;
         
         // Add user message to chat
-        if (message) {
-            addMessage('user', message, currentFile ? 'text-with-attachment' : 'text');
-        } else if (currentFile) {
-            addMessage('user', currentFile.name, 'attachment');
-        }
+        addMessage('user', message);
         
         // Clear input
         chatInput.value = '';
         
         // Handle the file if any
-        let fileData = null;
         if (currentFile) {
-            fileData = {
-                name: currentFile.name,
-                type: currentFile.type,
-                size: currentFile.size
-            };
+            // In a real app, you'd handle file upload here
             
             // Clear the attachment UI
             currentFile = null;
@@ -354,116 +329,80 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Process the message
-        processMessage(message, fileData);
+        processMessage(message);
     }
     
-    // Process the message and get a response
-    function processMessage(message, fileData = null, isVoiceInput = false) {
+    // Process the message (simulate response)
+    function processMessage(message) {
         // Show typing indicator
         showTypingIndicator();
         
-        // Prepare the data to send
-        const data = {
-            message: message || ''
-        };
-        
-        if (fileData) {
-            data.attachment = fileData;
-        }
-        
-        // Send to server and get response
-        fetch('/chat', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
+        // Simulate processing time
+        setTimeout(() => {
             // Remove typing indicator
             removeTypingIndicator();
             
+            // Generate a response based on the message
+            const response = generateResponse(message);
+            
             // Add bot response to chat
-            setTimeout(() => {
-                addMessage('bot', data.response, 'text');
-                
-                // If input was voice, use speech synthesis for response
-                if (isVoiceInput && 'speechSynthesis' in window) {
-                    const utterance = new SpeechSynthesisUtterance(data.response);
-                    utterance.lang = 'en-US';
-                    utterance.rate = 1.0;
-                    utterance.pitch = 1.0;
-                    window.speechSynthesis.speak(utterance);
-                }
-            }, 500);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            removeTypingIndicator();
-            addMessage('bot', 'Sorry, there was an error processing your request.', 'text');
-        });
+            addMessage('bot', response);
+        }, 1500);
+    }
+    
+    // Function to generate a simple response
+    function generateResponse(message) {
+        message = message.toLowerCase();
+        
+        if (message.includes('flight') && (message.includes('book') || message.includes('reserve'))) {
+            return "I'd be happy to help you book a flight. You can use our booking tool at the top of the page, or I can guide you through the process. Where would you like to fly to?";
+        }
+        
+        if (message.includes('baggage') || message.includes('luggage')) {
+            return "For most British Airways flights, the standard baggage allowance is 23kg for checked bags in Economy, 32kg in Business/Club class, and 32kg in First class. You can check specific allowances for your flight on our website or in your booking confirmation.";
+        }
+        
+        if (message.includes('cancel') || message.includes('refund')) {
+            return "I understand you're inquiring about cancellations or refunds. Most British Airways bookings can be changed or cancelled online through the 'Manage My Booking' section on our website. The refund policy depends on your ticket type. Would you like me to provide more details?";
+        }
+        
+        if (message.includes('check in')) {
+            return "Online check-in opens 24 hours before your flight and closes 1 hour before departure. You can check in on our website or through the British Airways app. Would you like me to help you with the check-in process?";
+        }
+        
+        if (message.includes('avios') || message.includes('executive club') || message.includes('points')) {
+            return "The Executive Club is British Airways' loyalty program where you can earn Avios points when you fly with us or our partners. You can redeem these points for flights, upgrades, hotels, car rentals, and more. Would you like to know how to join or learn more about the program?";
+        }
+        
+        if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
+            return "Hello! Welcome to British Airways. How can I assist you today?";
+        }
+        
+        // Default response
+        return "Thank you for your message. As a virtual assistant, I can help with flight bookings, baggage information, check-in procedures, and general queries about British Airways services. How can I assist you further?";
     }
     
     // Function to add message to chat
-    function addMessage(sender, message, type = 'text') {
+    function addMessage(sender, message) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = 'flex mb-4';
+        messageDiv.className = `chat-message ${sender}`;
         
         if (sender === 'user') {
-            let messageContent = '';
-            
-            // Create different content based on the message type
-            if (type === 'attachment') {
-                messageContent = `
-                    <div class="bg-blue-100 rounded-lg py-2 px-3 shadow-sm max-w-[80%]">
-                        <div class="flex items-center">
-                            <i class="fas fa-file-alt text-google-blue mr-2"></i>
-                            <p class="text-sm">${escapeHtml(message)}</p>
-                        </div>
-                    </div>
-                `;
-            } else if (type === 'voice') {
-                messageContent = `
-                    <div class="bg-blue-100 rounded-lg py-2 px-3 shadow-sm max-w-[80%]">
-                        <div class="flex items-start">
-                            <i class="fas fa-microphone text-google-red mt-1 mr-2"></i>
-                            <p class="text-sm">${escapeHtml(message)}</p>
-                        </div>
-                    </div>
-                `;
-            } else if (type === 'text-with-attachment') {
-                messageContent = `
-                    <div class="bg-blue-100 rounded-lg py-2 px-3 shadow-sm max-w-[80%]">
-                        <p class="text-sm mb-2">${escapeHtml(message)}</p>
-                        <div class="flex items-center text-xs text-gray-600">
-                            <i class="fas fa-paperclip mr-1"></i>
-                            <span>Attachment included</span>
-                        </div>
-                    </div>
-                `;
-            } else {
-                messageContent = `
-                    <div class="bg-blue-100 rounded-lg py-2 px-3 shadow-sm max-w-[80%]">
-                        <p class="text-sm">${escapeHtml(message)}</p>
-                    </div>
-                `;
-            }
-            
             messageDiv.innerHTML = `
-                <div class="flex-grow"></div>
-                ${messageContent}
-                <div class="w-8 h-8 rounded-full bg-white border-2 border-google-blue flex items-center justify-center ml-2 flex-shrink-0">
-                    <i class="fas fa-user text-google-blue text-sm"></i>
+                <div class="message-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="message-content">
+                    <p>${escapeHtml(message)}</p>
                 </div>
             `;
         } else {
             messageDiv.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-white border-2 border-google-blue flex items-center justify-center mr-2 flex-shrink-0">
-                    <i class="fas fa-robot text-google-blue text-sm"></i>
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
                 </div>
-                <div class="bg-white rounded-lg py-2 px-3 shadow-sm max-w-[80%]">
-                    <p class="text-sm">${escapeHtml(message)}</p>
+                <div class="message-content">
+                    <p>${escapeHtml(message)}</p>
                 </div>
             `;
         }
@@ -475,23 +414,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Show typing indicator
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
-        typingDiv.className = 'flex mb-4 typing-indicator-container';
+        typingDiv.className = 'chat-message bot typing-indicator-container';
         typingDiv.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-white border-2 border-google-blue flex items-center justify-center mr-2 flex-shrink-0">
-                <i class="fas fa-robot text-google-blue text-sm"></i>
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
             </div>
-            <div class="bg-white rounded-lg py-2 px-3 shadow-sm">
-                <p class="text-sm typing-indicator">Typing</p>
+            <div class="message-content">
+                <p><span class="typing-dots">Typing</span></p>
             </div>
         `;
         chatContainer.appendChild(typingDiv);
         scrollToBottom();
+        
+        // Add typing animation
+        const typingDots = typingDiv.querySelector('.typing-dots');
+        let dots = 1;
+        const typingAnimation = setInterval(() => {
+            dots = (dots % 3) + 1;
+            typingDots.textContent = 'Typing' + '.'.repeat(dots);
+        }, 500);
+        
+        // Store the interval ID in the element for later cleanup
+        typingDiv.dataset.typingInterval = typingAnimation;
     }
     
     // Remove typing indicator
     function removeTypingIndicator() {
         const typingIndicator = document.querySelector('.typing-indicator-container');
         if (typingIndicator) {
+            // Clear the interval
+            clearInterval(typingIndicator.dataset.typingInterval);
             typingIndicator.remove();
         }
     }
@@ -521,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pauseRecording.disabled = true;
             resumeRecording.disabled = true;
             resetRecording.disabled = true;
-            sendVoice.disabled = transcriptionResult.textContent.trim() === '';
+            sendVoice.disabled = !transcriptionResult.textContent.trim();
         }
     }
     
@@ -538,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update status based on whether we have transcription
             if (recordingStatus) {
                 if (transcriptionResult.textContent.trim() !== '') {
-                    recordingStatus.innerHTML = '<span class="text-google-blue">✓</span> Recording complete. You can send or reset.';
+                    recordingStatus.innerHTML = '<span style="color: var(--ba-navy);">✓</span> Recording complete. You can send or reset.';
                 } else {
                     recordingStatus.textContent = 'Recording stopped. Click microphone to try again.';
                 }
@@ -553,7 +505,6 @@ document.addEventListener('DOMContentLoaded', function() {
         stopRecording();
         transcriptionResult.innerHTML = '';
         sendVoice.disabled = true;
-        sendVoice.classList.remove('animate-pulse');
         pauseRecording.disabled = true;
         resumeRecording.disabled = true;
         resetRecording.disabled = true;
@@ -591,18 +542,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                     
                     // For inner points, create more natural movement
-                    // Use the previous value as a starting point for smoother transitions
                     let prevVal = lastValues[i];
                     
                     // Add randomness but with some inertia from previous frame
-                    let amplitude = Math.random() * 18 + 2; // Smaller than before for less jumpiness
+                    let amplitude = Math.random() * 18 + 2;
                     
                     // Simulate "loud" bursts occasionally
                     if (Math.random() < 0.05) {
                         amplitude += 15;
                     }
                     
-                    // Move somewhat toward the random target, but not all the way (smoother)
+                    // Move toward the random target, but not all the way (smoother)
                     let targetY = 30 - amplitude + Math.random() * (amplitude/3);
                     let y = prevVal + (targetY - prevVal) * 0.3;
                     
@@ -642,7 +592,6 @@ document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(updateWaveform);
         } else {
             // Smoothly animate back to flat line when inactive
-            const currentPath = waveformPath.getAttribute('d');
             const flatPath = 'M0,30 Q25,30 50,30 T100,30 T150,30 T200,30 T250,30 T300,30';
             
             // Simple transition using CSS
@@ -654,5 +603,69 @@ document.addEventListener('DOMContentLoaded', function() {
                 waveformPath.style.transition = '';
             }, 500);
         }
+    }
+    
+    // Handle booking and destination tabs
+    bookingTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            bookingTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            this.classList.add('active');
+        });
+    });
+    
+    destinationTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            destinationTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            this.classList.add('active');
+            
+            // In a real application, you would update the destination content here
+            // based on which tab was clicked
+            // updateDestinationContent(this.textContent.trim());
+        });
+    });
+    
+    // Function to update destination content (simplified demo version)
+    function updateDestinationContent(destination) {
+        const contentDiv = document.querySelector('.destination-content');
+        let heading, description, image;
+        
+        switch(destination) {
+            case 'London':
+                heading = 'London - The heart of Britain';
+                description = 'Experience world-class museums, historic landmarks, and vibrant cultural scenes in the British capital.';
+                image = 'static/images/london-destination.jpg';
+                break;
+            case 'New York':
+                heading = 'New York - The city that never sleeps';
+                description = 'Discover the iconic skyline, Broadway shows, and diverse neighborhoods of the Big Apple.';
+                image = 'static/images/newyork-destination.jpg';
+                break;
+            case 'Dubai':
+                heading = 'Dubai - A luxury desert oasis';
+                description = 'Experience the perfect blend of modern architecture, luxury shopping, and traditional Arabian culture.';
+                image = 'static/images/dubai-destination.jpg';
+                break;
+            case 'Singapore':
+                heading = 'Singapore - Where tradition meets innovation';
+                description = 'Explore the Garden City with its stunning architecture, diverse cuisine, and rich cultural heritage.';
+                image = 'static/images/singapore-destination.jpg';
+                break;
+            case 'Sydney':
+                heading = 'Sydney - Australia\'s shining harbor city';
+                description = 'Visit the iconic Opera House, beautiful beaches, and enjoy the laid-back Australian lifestyle.';
+                image = 'static/images/sydney-destination.jpg';
+                break;
+            default:
+                heading = 'London - The heart of Britain';
+                description = 'Experience world-class museums, historic landmarks, and vibrant cultural scenes in the British capital.';
+                image = 'static/images/london-destination.jpg';
+        }
+        
+        // In a real app, you would update the actual content in the DOM
+        console.log(`Updated destination to: ${destination}`);
     }
 });
