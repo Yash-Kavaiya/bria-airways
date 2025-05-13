@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Import speech synthesis utilities
+    import('./speech-synthesis.js').then(speech => {
+        // Initialize speech synthesis
+        speech.initSpeechSynthesis();
+        window.speakText = speech.speakText;
+    }).catch(error => {
+        console.error('Error loading speech synthesis:', error);
+    });
+
     // DOM Elements - Chat UI
     const chatbotIcon = document.getElementById('chatbot-icon');
     const chatbotWindow = document.getElementById('chatbot-window');
@@ -288,8 +297,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 stopRecording();
                 resetVoiceUI();
                 
-                // Process the message (simulate response)
-                processMessage(text);
+                // Process the message with voice input flag set to true
+                processMessage(text, null, true);
                 
                 // Return focus to chat input
                 chatInput.focus();
@@ -370,14 +379,26 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add the response to the chat
             if (data.response) {
                 addMessage('assistant', data.response);
+                // Use speech synthesis for voice response if input was voice
+                if (isVoiceInput && window.speakText) {
+                    window.speakText(data.response);
+                }
             } else if (data.error) {
-                addMessage('assistant', 'Sorry, there was an error: ' + data.error);
+                const errorMsg = 'Sorry, there was an error: ' + data.error;
+                addMessage('assistant', errorMsg);
+                if (isVoiceInput && window.speakText) {
+                    window.speakText(errorMsg);
+                }
             }
         })
         .catch(error => {
             console.error('Error:', error);
             removeTypingIndicator();
-            addMessage('assistant', 'Sorry, there was an error processing your message.');
+            const errorMsg = 'Sorry, there was an error processing your message.';
+            addMessage('assistant', errorMsg);
+            if (isVoiceInput && window.speakText) {
+                window.speakText(errorMsg);
+            }
         });
     }
     
