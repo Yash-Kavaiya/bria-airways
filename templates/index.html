@@ -3,456 +3,670 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>British Airways - Fly to London, Europe, USA and The World</title>
-    <link rel="stylesheet" href="static/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="https://freepngdesign.com/content/uploads/images/p-2839-1-british-airways-logo-png-transparent-logo-730187218491.png">
+    <title>Book with Bria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #21365f 0%, #2d4a72 50%, #21365f 100%);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 40px;
+        }
+
+        .header-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(193, 51, 58, 0.1), rgba(33, 54, 95, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            border-bottom: 2px solid rgba(193, 51, 58, 0.2);
+        }
+
+        .back-button {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(193, 51, 58, 0.2);
+        }
+
+        .back-button:hover {
+            color: white;
+            background: rgba(193, 51, 58, 0.3);
+            transform: translateX(-3px);
+        }
+
+        .assistant-title {
+            color: white;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 15px rgba(193, 51, 58, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .character-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .character {
+            width: 200px;
+            height: 300px;
+            background: linear-gradient(145deg, #f8d7da, #f1c2c6);
+            border-radius: 50px;
+            position: relative;
+            animation: elegantBreathing 8s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .assistant-info {
+            text-align: center;
+            color: white;
+        }
+
+        .assistant-name {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(193, 51, 58, 0.5);
+        }
+
+        .assistant-role {
+            font-size: 16px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+
+        /* Premium Animations */
+        @keyframes elegantBreathing {
+            0%, 100% { transform: translateY(0px) scale(1) rotateY(0deg); }
+            50% { transform: translateY(-10px) scale(1.02) rotateY(2deg); }
+        }
+
+        @keyframes naturalBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+
+        @keyframes eyeExpression {
+            0%, 30%, 70%, 100% { transform: translateX(0px) translateY(0px); }
+            15% { transform: translateX(-2px) translateY(-1px); }
+            45% { transform: translateX(2px) translateY(1px); }
+            85% { transform: translateX(-1px) translateY(0px); }
+        }
+
+        @keyframes eyeLight {
+            0%, 100% { opacity: 0.9; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes professionalTalk {
+            0% { height: 15px; transform: translateX(-50%) scaleY(1); }
+            100% { height: 22px; transform: translateX(-50%) scaleY(1.4); }
+        }
+
+        @keyframes hairShine {
+            0%, 100% { opacity: 0.1; transform: translateX(-20px); }
+            50% { opacity: 0.3; transform: translateX(20px); }
+        }
+
+        @keyframes badgeGlow {
+            0%, 100% { box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.4); }
+            50% { box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 0 20px rgba(255, 215, 0, 0.6); }
+        }
+
+        @keyframes scarfElegance {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(1deg); }
+        }
+
+        @keyframes gracefulGesture {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-12deg); }
+            75% { transform: rotate(12deg); }
+        }
+
+        @keyframes studioLighting {
+            0%, 100% { opacity: 0.4; transform: rotate(0deg) scale(1); }
+            50% { opacity: 0.7; transform: rotate(8deg) scale(1.05); }
+        }
+
+        /* Chat Panel with Theme Colors */
+        .chat-panel {
+            width: 440px;
+            background: linear-gradient(145deg, #21365f, #1a2b4d);
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid rgba(193, 51, 58, 0.3);
+        }
+
+        .chat-header {
+            padding: 30px;
+            border-bottom: 2px solid rgba(193, 51, 58, 0.2);
+            color: white;
+            font-size: 22px;
+            font-weight: 300;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(193, 51, 58, 0.1), rgba(33, 54, 95, 0.2));
+            letter-spacing: 1px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 18px 24px;
+            border-radius: 25px;
+            font-size: 15px;
+            line-height: 1.6;
+            animation: messageSlide 0.5s ease-out;
+            position: relative;
+        }
+
+        .message.assistant {
+            background: linear-gradient(135deg, #c1333a, #d63c43);
+            color: white;
+            align-self: flex-start;
+            box-shadow: 0 10px 30px rgba(193, 51, 58, 0.3);
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #21365f, #2d4a72);
+            color: white;
+            align-self: flex-end;
+            box-shadow: 0 10px 30px rgba(33, 54, 95, 0.3);
+        }
+
+        @keyframes messageSlide {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .chat-input-container {
+            padding: 30px;
+            border-top: 2px solid rgba(193, 51, 58, 0.2);
+        }
+
+        .chat-input {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(33, 54, 95, 0.3);
+            border: 2px solid rgba(193, 51, 58, 0.3);
+            border-radius: 30px;
+            color: white;
+            outline: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+        }
+
+        .chat-input:focus {
+            border-color: #c1333a;
+            box-shadow: 0 0 25px rgba(193, 51, 58, 0.4);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #c1333a, #d63c43);
+            border-radius: 25px;
+            align-self: flex-start;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(193, 51, 58, 0.3);
+        }
+
+        .typing-indicator.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-dot {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            animation: typing 1.6s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-12px); opacity: 1; }
+        }
+
+        .footer-links {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border-radius: 15px;
+        }
+
+        .footer-links a:hover {
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(193, 51, 58, 0.2);
+        }
+
+        /* Controls */
+        .controls {
+            position: absolute;
+            top: 100px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .control-btn {
+            width: 55px;
+            height: 55px;
+            background: rgba(193, 51, 58, 0.2);
+            border: 2px solid rgba(193, 51, 58, 0.4);
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(15px);
+            font-size: 18px;
+        }
+
+        .control-btn:hover {
+            background: rgba(193, 51, 58, 0.4);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(193, 51, 58, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                height: 50vh;
+                padding: 20px;
+            }
+            
+            .character-container {
+                width: 280px;
+                height: 380px;
+            }
+            
+            .cute-avatar {
+                width: 220px;
+                height: 320px;
+            }
+            
+            .uniform-body {
+                width: 130px;
+                height: 180px;
+            }
+            
+            .chat-panel {
+                width: 100%;
+                height: 50vh;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Top Utility Nav -->
-    <div class="utility-nav">
-        <div class="container">
-            <div class="utility-nav-left">
-                <a href="#">Executive Club</a>
-                <a href="#">Business</a>
-                <a href="#">Holidays</a>
-                <a href="#">Help</a>
-            </div>
-            <div class="utility-nav-right">
-                <a href="#" class="login-btn"><i class="fas fa-user"></i> Log in / Sign up</a>
-                <div class="language-selector">
-                    <span>EN</span>
-                    <i class="fas fa-chevron-down"></i>
+    <div class="left-panel">
+        <a href="#" class="back-button">← Back</a>
+        <h1 class="assistant-title">Book with Bria</h1>
+        
+        <div class="character-container">
+            <div class="character" id="character">
+                <div class="hair"></div>
+                <div class="hat">
+                    <div class="hat-badge"></div>
+                </div>
+                <div class="head">
+                    <div class="eyes">
+                        <div class="eye">
+                            <div class="pupil"></div>
+                        </div>
+                        <div class="eye">
+                            <div class="pupil"></div>
+                        </div>
+                    </div>
+                    <div class="nose"></div>
+                    <div class="lips" id="lips"></div>
+                </div>
+                <div class="scarf"></div>
+                <div class="name-badge"></div>
+                <div class="arm left">
+                    <div class="hand"></div>
+                </div>
+                <div class="arm right">
+                    <div class="hand"></div>
                 </div>
             </div>
+            
+            <div class="assistant-info">
+                <div class="assistant-name">Premium Chat Experience</div>
+                <div class="assistant-role"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="control-btn" id="soundBtn" title="Sound">🔊</div>
+            <div class="control-btn" id="languageBtn" title="Language">🌐</div>
+            <div class="control-btn" id="helpBtn" title="Help">📱</div>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Terms and conditions</a>
+            <a href="#">Cookie Policy</a>
+            <a href="#">Privacy</a>
         </div>
     </div>
 
-    <!-- Main Navigation -->
-    <header class="main-header">
-        <div class="container">
-            <div class="logo">
-                <a href="/"><img src="https://brandslogos.com/wp-content/uploads/images/large/british-airways-logo-1.png" alt="British Airways"></a>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#" class="active">Book</a></li>
-                    <li><a href="/travel-information">My Trips</a></li>
-                    <li><a href="/travel-information">Travel Information</a></li>
-                    <li><a href="/destinations">Destinations</a></li>
-                    <li><a href="/executive-club">Executive Club</a></li>
-                </ul>
-            </nav>
-            <div class="nav-cta">
-                <a href="#" class="search-btn"><i class="fas fa-search"></i></a>
-                <a href="#" class="menu-btn"><i class="fas fa-bars"></i></a>
+    <div class="chat-panel">
+        <div class="chat-header">Bria Assistant</div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message assistant">
+                Hi there! I'm Bria, your cute flight assistant! I'm here to make your travel experience amazing with personalized service and a smile. How can I help you today?
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section with Booking Tool -->
-    <section class="hero" style="background-image: url('static/images/hero-london.jpg');">
-        <div class="container">
-            <div class="booking-container">
-                <div class="booking-tabs">
-                    <button class="active">Book a Flight</button>
-                    <button>Manage My Booking</button>
-                    <button>Check In</button>
-                    <button>Flight Status</button>
-                </div>
-                <div class="booking-form">
-                    <div class="booking-options">
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type" checked>
-                            <span class="radio-label">Return</span>
-                        </label>
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type">
-                            <span class="radio-label">One way</span>
-                        </label>
-                        <label class="radio-container">
-                            <input type="radio" name="trip-type">
-                            <span class="radio-label">Multi-city</span>
-                        </label>
-                    </div>
-                    <div class="booking-row">
-                        <div class="form-group">
-                            <label>From</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-plane-departure"></i>
-                                <input type="text" placeholder="Airport or city">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>To</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-plane-arrival"></i>
-                                <input type="text" placeholder="Airport or city">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="booking-row">
-                        <div class="form-group">
-                            <label>Departure</label>
-                            <div class="input-with-icon">
-                                <i class="far fa-calendar-alt"></i>
-                                <input type="date">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Return</label>
-                            <div class="input-with-icon">
-                                <i class="far fa-calendar-alt"></i>
-                                <input type="date">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="booking-row">
-                        <div class="form-group">
-                            <label>Passengers</label>
-                            <div class="input-with-icon">
-                                <i class="fas fa-user-friends"></i>
-                                <select>
-                                    <option>1 Adult, Economy</option>
-                                    <option>2 Adults, Economy</option>
-                                    <option>1 Adult, Business</option>
-                                    <option>1 Adult, 1 Child, Economy</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button class="search-flights-btn">Search flights</button>
-                        </div>
-                    </div>
-                    <div class="extra-options">
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkbox-label">Add a hotel</span>
-                        </label>
-                        <label class="checkbox-container">
-                            <input type="checkbox">
-                            <span class="checkbox-label">Add a car</span>
-                        </label>
-                        <a href="#" class="promo-link">Add a promotion code</a>
-                    </div>
-                </div>
-            </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
         </div>
-    </section>
 
-    <!-- Offers Section -->
-    <section class="offers">
-        <div class="container">
-            <h2>Latest offers</h2>
-            <p class="section-intro">Explore our latest offers and find the perfect getaway for you. From city breaks to beach holidays, we have something for everyone.</p>
-            
-            <div class="offers-grid">
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/london-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>London breaks from £99</h3>
-                        <p>Experience the best of British culture with our London city break packages.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
-                </div>
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/newyork-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>New York from £349</h3>
-                        <p>Take a bite out of the Big Apple with our fantastic deals to New York.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
-                </div>
-                <div class="offer-card">
-                    <div class="offer-image" style="background-image: url('static/images/caribbean-offer.jpg');"></div>
-                    <div class="offer-content">
-                        <h3>Caribbean escapes from £499</h3>
-                        <p>Relax on pristine beaches with our exclusive Caribbean packages.</p>
-                        <a href="#" class="btn-secondary">Book now</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="view-all-container">
-                <a href="#" class="view-all">View all offers <i class="fas fa-chevron-right"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Destinations Section -->
-    <section class="destinations">
-        <div class="container">
-            <h2>Popular destinations</h2>
-            
-            <div class="destination-tabs">
-                <button class="active">London</button>
-                <button>New York</button>
-                <button>Dubai</button>
-                <button>Singapore</button>
-                <button>Sydney</button>
-            </div>
-            
-            <div class="destination-content">
-                <div class="destination-info">
-                    <h3>London - The heart of Britain</h3>
-                    <p>Experience world-class museums, historic landmarks, and vibrant cultural scenes in the British capital. From Buckingham Palace to the London Eye, there's something for everyone in this iconic city.</p>
-                    <ul class="destination-highlights">
-                        <li><i class="fas fa-check"></i> Multiple daily flights</li>
-                        <li><i class="fas fa-check"></i> Direct service from 15+ US cities</li>
-                        <li><i class="fas fa-check"></i> Award-winning service</li>
-                    </ul>
-                    <a href="#" class="btn-primary">Flights to London</a>
-                </div>
-                <div class="destination-image" style="background-image: url('static/images/london-destination.jpg');"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="experience">
-        <div class="container">
-            <h2>The British Airways experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <div class="experience-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Dining</h3>
-                    <p>Enjoy delicious meals created by top chefs, paired with a selection of fine wines and beverages.</p>
-                    <a href="#">Learn more</a>
-                </div>
-                <div class="experience-card">
-                    <div class="experience-icon">
-                        <i class="fas fa-couch"></i>
-                    </div>
-                    <h3>Comfort</h3>
-                    <p>Relax in ergonomically designed seats with adjustable headrests and ample legroom.</p>
-                    <a href="#">Learn more</a>
-                </div>
-                <div class="experience-card">
-                    <div class="experience-icon">
-                        <i class="fas fa-film"></i>
-                    </div>
-                    <h3>Entertainment</h3>
-                    <p>Access hundreds of movies, TV shows, music and games on your personal screen.</p>
-                    <a href="#">Learn more</a>
-                </div>
-                <div class="experience-card">
-                    <div class="experience-icon">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                    <h3>Wellbeing</h3>
-                    <p>Amenity kits with skincare products, comfortable bedding, and ambient cabin lighting.</p>
-                    <a href="#">Learn more</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Travel Planning Section -->
-    <section class="travel-planning">
-        <div class="container">
-            <h2>Plan your journey</h2>
-            <div class="planning-cards">
-                <div class="planning-card">
-                    <img src="static/images/baggage.jpg" alt="Baggage Information">
-                    <h3>Baggage</h3>
-                    <p>Check baggage allowances and restrictions for your journey.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="planning-card">
-                    <img src="static/images/check-in.jpg" alt="Check-in Options">
-                    <h3>Check-in options</h3>
-                    <p>Check in online, on your mobile or at the airport.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-                <div class="planning-card">
-                    <img src="static/images/travel-docs.jpg" alt="Travel Documents">
-                    <h3>Travel requirements</h3>
-                    <p>Check passport, visa and health requirements for your destination.</p>
-                    <a href="#" class="btn-text">Find out more <i class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Loyalty Program -->
-    <section class="loyalty">
-        <div class="container">
-            <div class="loyalty-content">
-                <h2>Join the Executive Club</h2>
-                <p>Collect Avios when you fly with us and our partners. Spend them on rewards like flights, upgrades, car hire, hotels and more.</p>
-                <a href="#" class="btn-primary">Join for free</a>
-            </div>
-            <div class="loyalty-image">
-                <img src="static/images/executive-club.jpg" alt="British Airways Executive Club">
-            </div>
-        </div>
-    </section>
-
-    <!-- Download App Section -->
-    <section class="app-download">
-        <div class="container">
-            <div class="app-content">
-                <h2>Download the British Airways app</h2>
-                <p>Book flights, check in, access your boarding pass and more with our convenient mobile app.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- App Download Section -->
-    <section class="app-download">
-        <div class="container">
-            <h2>Download our mobile app</h2>
-            <div class="store-buttons">
-                <a href="https://apps.apple.com/gb/app/british-airways/id284941649" target="_blank" class="app-store">
-                    <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" height="50">
-                </a>
-                <a href="https://play.google.com/store/apps/details?id=com.ba.mobile" target="_blank" class="play-store">
-                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="50">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-sections">
-                <div class="footer-section">
-                    <h3>Help</h3>
-                    <ul>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Manage my booking</a></li>
-                        <li><a href="#">Disruption assistance</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>About British Airways</h3>
-                    <ul>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Press</a></li>
-                        <li><a href="#">IAG Group</a></li>
-                        <li><a href="#">Modern Slavery Statement</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Website</h3>
-                    <ul>
-                        <li><a href="#">UK site</a></li>
-                        <li><a href="#">Site map</a></li>
-                        <li><a href="#">Terms & conditions</a></li>
-                        <li><a href="#">Privacy policy</a></li>
-                        <li><a href="#">Cookie policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                    <div class="newsletter">
-                        <h3>Subscribe to our newsletter</h3>
-                        <div class="newsletter-form">
-                            <input type="email" placeholder="Enter your email address">
-                            <button type="submit">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright">
-                    <p>&copy; 2025 British Airways. All rights reserved.</p>
-                </div>
-                <div class="payment-methods">
-                    <img src="static/images/payment-icons.png" alt="Accepted Payment Methods">
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chat Bot Icon -->
-    <div id="chatbot-icon" class="chatbot-icon">
-        <i class="fas fa-comment-dots"></i>
-    </div>
-
-    <!-- Chat Bot Window -->
-    <div id="chatbot-window" class="chatbot-window hidden">
-        <div class="chatbot-header">
-            <div class="chatbot-logo">
-                <img src="https://brandslogos.com/wp-content/uploads/images/large/british-airways-logo-1.png" alt="British Airways">
-                <span>Virtual Assistant</span>
-            </div>
-            <div class="chatbot-controls">
-                <button id="minimize-chat"><i class="fas fa-minus"></i></button>
-                <button id="close-chat"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div id="chat-container" class="chat-container">
-            <div class="chat-message bot">
-                <div class="message-avatar">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div class="message-content">
-                    <p>Hello! I'm your British Airways virtual assistant. How can I help you today?</p>
-                </div>
-            </div>
-            <!-- More messages will be added here dynamically -->
-        </div>
         <div class="chat-input-container">
-            <div id="attachment-preview" class="attachment-preview hidden">
-                <div class="attachment-info">
-                    <i class="fas fa-file-alt"></i>
-                    <span id="attachment-name"></span>
-                </div>
-                <button id="remove-attachment"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="chat-input-controls">
-                <button id="attachment-button"><i class="fas fa-paperclip"></i></button>
-                <input type="file" id="file-input" class="hidden">
-                <input type="text" id="chat-input" placeholder="Type your message...">
-                <button id="voice-button"><i class="fas fa-microphone"></i></button>
-                <button id="send-button"><i class="fas fa-paper-plane"></i></button>
-            </div>
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type your message here...">
         </div>
     </div>
 
-    <!-- Voice Popup -->
-    <div id="voice-popup-overlay" class="voice-popup-overlay hidden"></div>
-    <div id="voice-popup" class="voice-popup hidden">
-        <div class="voice-popup-header">
-            <h3>Voice Input</h3>
-            <button id="close-voice-popup"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="waveform-container">
-            <svg width="100%" height="60" viewBox="0 0 300 60" preserveAspectRatio="none">
-                <path id="waveform-svg-path" d="M0,30 Q25,30 50,30 T100,30 T150,30 T200,30 T250,30 T300,30"></path>
-            </svg>
-            <div id="recording-indicator" class="recording-indicator hidden"></div>
-        </div>
-        <div id="transcription-result" class="transcription-result"></div>
-        <div id="recording-status" class="recording-status">Click the microphone to start recording</div>
-        <div class="voice-controls">
-            <button id="start-recording"><i class="fas fa-microphone"></i></button>
-            <div class="voice-control-group">
-                <button id="pause-recording" disabled><i class="fas fa-pause"></i></button>
-                <button id="resume-recording" disabled><i class="fas fa-play"></i></button>
-                <button id="reset-recording" disabled><i class="fas fa-redo"></i></button>
-            </div>
-            <button id="send-voice" disabled><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
+    <script>
+        class PremiumAssistant {
+            constructor() {
+                this.chatMessages = document.getElementById('chatMessages');
+                this.chatInput = document.getElementById('chatInput');
+                this.typingIndicator = document.getElementById('typingIndicator');
+                this.character = document.getElementById('character');
+                this.lips = document.getElementById('lips');
+                this.soundEnabled = true;
+                
+                this.conversations = [
+                    {
+                        trigger: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
+                        response: "Hello! I'm so happy to see you! I'm Bria, your friendly flight assistant, and I'm here to make your travel dreams come true. What wonderful journey can I help you plan today?",
+                        options: ['Book a Flight ✈️', 'Travel Tips 🌟', 'Special Services 💼', 'Help Me Choose 🤔']
+                    },
+                    {
+                        trigger: ['flight', 'book flight', 'premium flight booking', 'reservation', 'booking'],
+                        response: "Excellent! I'm delighted to assist you with our premium flight booking service. To curate the perfect travel experience for you, may I know your preferred departure city, destination, and travel dates?",
+                        options: ['Business Routes', 'First Class Options', 'Private Jets', 'Multi-City Travel']
+                    },
+                    {
+                        trigger: ['business routes', 'business class', 'business'],
+                        response: "Outstanding choice! Our Business Class offers lie-flat beds, award-winning cuisine, and exclusive lounge access. Which premium route interests you most?",
+                        options: ['London - Doha', 'New York - Dubai', 'Paris - Singapore', 'Custom Route']
+                    },
+                    {
+                        trigger: ['first class', 'first class options', 'first'],
+                        response: "Exceptional selection! Our First Class features private suites, personal butler service, and Michelin-star dining at altitude. This is luxury aviation redefined. Shall I present our flagship routes?",
+                        options: ['Ultra-Premium Routes', 'Suite Features', 'Culinary Experience', 'Personal Service']
+                    },
+                    {
+                        trigger: ['private jets', 'private jet', 'charter'],
+                        response: "Magnificent choice! Our private jet charter service offers ultimate privacy, flexibility, and luxury. With our fleet of premium aircraft, every journey becomes an exclusive experience. What type of aircraft suits your needs?",
+                        options: ['Light Jets', 'Mid-Size Jets', 'Heavy Jets', 'Ultra-Long Range']
+                    },
+                    {
+                        trigger: ['luxury travel services', 'luxury', 'vip'],
+                        response: "I'm pleased to offer our comprehensive luxury travel services. From premium accommodations to exclusive experiences, we curate every detail of your journey. What aspect of luxury travel can I arrange for you?",
+                        options: ['Five-Star Hotels', 'Exclusive Experiences', 'Ground Transportation', 'Concierge Services']
+                    }
+                ];
 
-    <script src="static/js/script.js"></script>
+                this.initializeChat();
+            }
+
+            initializeChat() {
+                this.chatInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendMessage();
+                    }
+                });
+
+                // Sound control
+                document.getElementById('soundBtn').addEventListener('click', () => {
+                    this.soundEnabled = !this.soundEnabled;
+                    document.getElementById('soundBtn').textContent = this.soundEnabled ? '🔊' : '🔇';
+                });
+
+                // Professional welcome
+                setTimeout(() => {
+                    this.animateCharacter();
+                    this.speakText("Good day! I'm Bria, your professional flight assistant. I'm here to provide you with exceptional service and assistance with all your travel needs.");
+                }, 2000);
+            }
+
+            sendMessage() {
+                const message = this.chatInput.value.trim();
+                if (!message) return;
+
+                this.addMessage(message, 'user');
+                this.chatInput.value = '';
+
+                this.showTyping();
+                setTimeout(() => {
+                    this.processMessage(message);
+                }, 2500);
+            }
+
+            addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `message ${sender}`;
+                messageDiv.textContent = text;
+                this.chatMessages.appendChild(messageDiv);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+
+                if (sender === 'assistant') {
+                    this.animateCharacter();
+                    this.speakText(text);
+                }
+            }
+
+            addOptions(options) {
+                const optionsContainer = document.createElement('div');
+                optionsContainer.style.display = 'flex';
+                optionsContainer.style.flexDirection = 'column';
+                optionsContainer.style.gap = '15px';
+                optionsContainer.style.marginTop = '20px';
+
+                options.forEach(option => {
+                    const optionBtn = document.createElement('div');
+                    optionBtn.style.cssText = `
+                        padding: 15px 22px;
+                        background: linear-gradient(135deg, rgba(193, 51, 58, 0.2), rgba(33, 54, 95, 0.3));
+                        border: 2px solid rgba(193, 51, 58, 0.4);
+                        border-radius: 25px;
+                        color: white;
+                        cursor: pointer;
+                        transition: all 0.4s ease;
+                        text-align: center;
+                        font-size: 15px;
+                        font-weight: 500;
+                        backdrop-filter: blur(10px);
+                    `;
+                    
+                    optionBtn.textContent = option;
+                    optionBtn.addEventListener('click', () => {
+                        this.addMessage(option, 'user');
+                        this.showTyping();
+                        setTimeout(() => {
+                            this.processMessage(option);
+                        }, 2000);
+                    });
+
+                    optionBtn.addEventListener('mouseenter', () => {
+                        optionBtn.style.background = 'linear-gradient(135deg, rgba(193, 51, 58, 0.4), rgba(33, 54, 95, 0.5))';
+                        optionBtn.style.transform = 'translateX(10px) scale(1.02)';
+                        optionBtn.style.boxShadow = '0 8px 25px rgba(193, 51, 58, 0.3)';
+                    });
+
+                    optionBtn.addEventListener('mouseleave', () => {
+                        optionBtn.style.background = 'linear-gradient(135deg, rgba(193, 51, 58, 0.2), rgba(33, 54, 95, 0.3))';
+                        optionBtn.style.transform = 'translateX(0) scale(1)';
+                        optionBtn.style.boxShadow = 'none';
+                    });
+
+                    optionsContainer.appendChild(optionBtn);
+                });
+
+                this.chatMessages.appendChild(optionsContainer);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+
+            processMessage(message) {
+                this.hideTyping();
+                
+                const lowerMessage = message.toLowerCase();
+                const conversation = this.conversations.find(conv => 
+                    conv.trigger.some(trigger => lowerMessage.includes(trigger))
+                );
+
+                if (conversation) {
+                    this.addMessage(conversation.response, 'assistant');
+                    if (conversation.options) {
+                        setTimeout(() => {
+                            this.addOptions(conversation.options);
+                        }, 1000);
+                    }
+                } else {
+                    const responses = [
+                        "Thank you for your inquiry. As your premium flight assistant, I'm committed to providing exceptional service tailored to your specific needs. Could you please elaborate on how I may best assist you?",
+                        "I appreciate your message. Our premium service is designed to exceed expectations in every aspect of travel. What particular service or information would you like me to provide?",
+                        "Thank you for choosing our premium service. I'm here to ensure your travel experience is nothing short of extraordinary. How may I personalize our assistance for you today?"
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    this.addMessage(randomResponse, 'assistant');
+                    
+                    setTimeout(() => {
+                        this.addOptions(['Premium Booking', 'Luxury Services', 'Executive Support', 'Personalized Assistance']);
+                    }, 1000);
+                }
+            }
+
+            showTyping() {
+                this.typingIndicator.classList.add('show');
+                this.chatMessages.appendChild(this.typingIndicator);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+            }
+
+            hideTyping() {
+                this.typingIndicator.classList.remove('show');
+                setTimeout(() => {
+                    if (this.typingIndicator.parentNode) {
+                        this.typingIndicator.parentNode.removeChild(this.typingIndicator);
+                    }
+                }, 500);
+            }
+
+            animateCharacter() {
+                this.character.style.animation = 'elegantBreathing 8s ease-in-out infinite, studioLighting 2s ease-in-out';
+                this.lips.classList.add('speaking');
+                
+                setTimeout(() => {
+                    this.lips.classList.remove('speaking');
+                }, 2500);
+            }
+
+            speakText(text) {
+                if (!this.soundEnabled || !('speechSynthesis' in window)) return;
+
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.8;
+                utterance.pitch = 1.1;
+                utterance.volume = 0.9;
+                
+                const voices = speechSynthesis.getVoices();
+                const premiumVoice = voices.find(voice => 
+                    voice.name.includes('Female') || 
+                    voice.name.includes('Samantha') ||
+                    voice.name.includes('Victoria') ||
+                    (voice.lang.includes('en') && voice.name.toLowerCase().includes('female'))
+                );
+                
+                if (premiumVoice) {
+                    utterance.voice = premiumVoice;
+                }
+
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Initialize the premium assistant
+        window.addEventListener('load', () => {
+            new PremiumAssistant();
+        });
+    </script>
 </body>
 </html>
