@@ -1322,3 +1322,275 @@ path {
         width: 90%;
     }
 }
+/* Enhanced Voice UI Styles - Add these to your existing styles.css */
+
+/* Voice button pulse animation */
+#voice-button {
+    position: relative;
+    overflow: hidden;
+}
+
+#voice-button.recording {
+    background-color: var(--ba-red) !important;
+    animation: voiceRecordingPulse 1.5s infinite;
+}
+
+@keyframes voiceRecordingPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(193, 51, 58, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(193, 51, 58, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(193, 51, 58, 0);
+    }
+}
+
+/* Enhanced voice popup */
+.voice-popup {
+    backdrop-filter: blur(20px);
+    background: linear-gradient(145deg, 
+        rgba(255, 255, 255, 0.95), 
+        rgba(255, 255, 255, 0.9)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Voice status indicators */
+.voice-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--ba-gray);
+    margin-bottom: 10px;
+}
+
+.voice-status.recording {
+    color: var(--ba-red);
+    font-weight: 600;
+}
+
+.voice-status.processing {
+    color: var(--ba-navy);
+    font-weight: 600;
+}
+
+.voice-status.error {
+    color: var(--ba-red);
+    font-weight: 600;
+}
+
+/* Waveform enhancements */
+.waveform-container {
+    background: linear-gradient(135deg, #f5f8fa, #e1e8ed);
+    border: 2px solid rgba(7, 90, 170, 0.1);
+    transition: all 0.3s ease;
+}
+
+.waveform-container.active {
+    border-color: var(--ba-red);
+    background: linear-gradient(135deg, #fff5f5, #ffe1e1);
+}
+
+/* Voice control improvements */
+.voice-controls {
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+}
+
+.voice-control-group {
+    background: rgba(7, 90, 170, 0.05);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+#start-recording {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#start-recording:hover {
+    transform: scale(1.1);
+}
+
+#start-recording.recording {
+    background-color: var(--ba-red) !important;
+    animation: recordingBounce 2s infinite;
+}
+
+@keyframes recordingBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Transcription result styling */
+.transcription-result {
+    min-height: 60px;
+    max-height: 120px;
+    overflow-y: auto;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.4;
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.transcription-result:not(:empty) {
+    border-color: var(--ba-navy);
+    background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+}
+
+.transcription-result .interim-transcript {
+    color: var(--ba-gray);
+    font-style: italic;
+}
+
+.transcription-result .final-transcript {
+    color: var(--ba-dark-gray);
+    font-weight: 500;
+}
+
+/* Voice message indicators in chat */
+.chat-message.voice-input .message-content::before {
+    content: "🎤";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--ba-red);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.chat-message.voice-response .message-content::after {
+    content: "🔊";
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    background: var(--ba-navy);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* Voice permission request */
+.voice-permission-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1003;
+}
+
+.voice-permission-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.voice-permission-content h3 {
+    color: var(--ba-navy);
+    margin-bottom: 15px;
+}
+
+.voice-permission-content p {
+    color: var(--ba-gray);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Accessibility improvements */
+.voice-controls button:focus {
+    outline: 3px solid var(--ba-light-blue);
+    outline-offset: 2px;
+}
+
+.voice-popup:focus-within {
+    box-shadow: 0 0 0 3px rgba(7, 90, 170, 0.3);
+}
+
+/* Error states */
+.voice-error {
+    background: linear-gradient(135deg, #ffe6e6, #ffcccc);
+    border: 2px solid var(--ba-red);
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    color: var(--ba-red);
+    font-weight: 500;
+}
+
+.voice-success {
+    background: linear-gradient(135deg, #e6ffe6, #ccffcc);
+    border: 2px solid #28a745;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    color: #28a745;
+    font-weight: 500;
+}
+
+/* Mobile voice UI adjustments */
+@media (max-width: 768px) {
+    .voice-popup {
+        width: 95%;
+        max-width: none;
+        margin: 0 auto;
+    }
+    
+    .voice-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .voice-control-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .waveform-container {
+        height: 80px;
+    }
+}
+
+/* Voice feature highlight */
+.voice-feature-highlight {
+    background: linear-gradient(135deg, rgba(7, 90, 170, 0.1), rgba(193, 51, 58, 0.1));
+    border: 2px solid rgba(7, 90, 170, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.voice-feature-highlight h4 {
+    color: var(--ba-navy);
+    margin-bottom: 10px;
+}
+
+.voice-feature-highlight p {
+    color: var(--ba-gray);
+    font-size: 14px;
+    margin-bottom: 0;
+}
