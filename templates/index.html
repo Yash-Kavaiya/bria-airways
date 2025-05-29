@@ -642,24 +642,40 @@
             speakText(text) {
                 if (!this.soundEnabled || !('speechSynthesis' in window)) return;
 
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.8;
-                utterance.pitch = 1.1;
-                utterance.volume = 0.9;
-                
-                const voices = speechSynthesis.getVoices();
-                const premiumVoice = voices.find(voice => 
-                    voice.name.includes('Female') || 
-                    voice.name.includes('Samantha') ||
-                    voice.name.includes('Victoria') ||
-                    (voice.lang.includes('en') && voice.name.toLowerCase().includes('female'))
-                );
-                
-                if (premiumVoice) {
-                    utterance.voice = premiumVoice;
-                }
+                // Cancel any ongoing speech
+                speechSynthesis.cancel();
 
-                speechSynthesis.speak(utterance);
+                const utterance = new SpeechSynthesisUtterance(text);
+                
+                // Configure for a more feminine voice with higher pitch
+                utterance.rate = 0.9;      // Slightly slower for clearer speech
+                utterance.pitch = 1.5;     // Higher pitch for more feminine voice
+                utterance.volume = 0.95;   // Clear volume
+                
+                // Wait for voices to be loaded
+                window.speechSynthesis.onvoiceschanged = () => {
+                    const voices = speechSynthesis.getVoices();
+                    
+                    // Prioritize female English voices
+                    const femaleVoice = voices.find(voice => 
+                        voice.lang.includes('en-GB') && 
+                        (voice.name.includes('Female') || voice.name.includes('Girl'))
+                    ) || voices.find(voice =>
+                        voice.lang.includes('en') && 
+                        (voice.name.includes('Female') || voice.name.includes('Girl'))
+                    );
+                    
+                    if (femaleVoice) {
+                        utterance.voice = femaleVoice;
+                        utterance.lang = femaleVoice.lang; // Match the voice language
+                    }
+                    
+                    // Add slight pauses for natural speech rhythm
+                    utterance.text = text.replace(/[.,!?]/g, match => `${match} `);
+                    
+                    // Speak the text
+                    speechSynthesis.speak(utterance);
+                };
             }
         }
 
