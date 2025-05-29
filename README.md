@@ -1,16 +1,10 @@
-# British Airways Website Clone 🛫✨
+#  Airways Website Clone 🛫✨
 
 ## 📸 Screenshots
 
-### Website Overview
-![British Airways Website](/Images/website.png)
-
-### AI Chatbot Interface
-![Chatbot Interface](/Images/chatbot.png)
-
 ## 📋 Project Overview
 
-This project is a functional clone of the British Airways website with an integrated AI chatbot powered by Google DialogFlow. The application provides users with a comprehensive travel experience interface including flight booking, trip management, travel information, destination exploration, and loyalty program engagement.
+This project is a functional clone of the Airways website with an integrated AI chatbot powered by Google DialogFlow. The application provides users with a comprehensive travel experience interface including flight booking, trip management, travel information, destination exploration, and loyalty program engagement.
 
 ### ✨ Key Features
 
@@ -67,8 +61,6 @@ british-airways/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/british-airways.git
-   cd british-airways
    ```
 
 2. **Create and activate a virtual environment**
