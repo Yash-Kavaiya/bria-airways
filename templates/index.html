@@ -95,6 +95,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             cursor: pointer;
             transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .character:hover {
@@ -103,6 +104,13 @@
 
         .character.speaking {
             animation: speakingAnimation 0.5s ease-in-out infinite alternate;
+        }
+
+        .character img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50px;
         }
 
         @keyframes speakingAnimation {
@@ -721,7 +729,7 @@
         
         <div class="character-container">
             <div class="character" id="character">
-                <i class="fas fa-user-tie" style="font-size: 48px; color: #21365f;"></i>
+                <img src="https://img.freepik.com/premium-photo/woman-air-hostess-images-with-ai-generated_545052-1237.jpg" alt="Bria - Air Hostess Assistant" />
             </div>
         </div>
 
@@ -1041,7 +1049,7 @@
                 setTimeout(() => {
                     this.animateCharacter();
                     if (this.soundEnabled) {
-                        this.speakText("Hello! I'm Bria, your Bria Airways virtual assistant. I'm here to help you with all your travel needs today!");
+                        this.speakText("Hi there! I'm Bria, your Bria voice assistant! I'm here to help you with flights, bookings, travel information, and make your journey amazing. What can I help you with today?");
                     }
                 }, 1000);
             }
