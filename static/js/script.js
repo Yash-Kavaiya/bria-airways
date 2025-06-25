@@ -63,58 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     interimTranscript += event.results[i][0].transcript;
                 }
             }
-            
-            // Display transcription with highlighting
-            transcriptionResult.innerHTML = `
-                <span class="text-dark font-weight-medium">${finalTranscript}</span>
-                <span class="text-muted font-italic">${interimTranscript}</span>
-            `;
-            
-            // Enable send button if we have text
-            if (finalTranscript.trim() !== '' || interimTranscript.trim() !== '') {
-                sendVoice.disabled = false;
-                recordingStatus.innerHTML = 'Speech detected! <span style="color: var(--ba-navy);">✓</span>';
-            } else {
-                sendVoice.disabled = true;
-            }
         };
         
         recognition.onend = function() {
-            if (isRecording && !isPaused) {
-                try {
-                    recognition.start();
-                } catch (e) {
-                    console.log('Recognition restart failed:', e);
-                    handleRecordingEnd();
-                }
-            } else {
-                handleRecordingEnd();
+            // For direct recording, don't restart automatically
+            if (isRecording) {
+                stopDirectVoiceRecording();
             }
         };
         
         recognition.onerror = function(event) {
             console.error('Speech recognition error:', event.error);
-            handleRecordingEnd();
             
-            let errorMessage = 'Error: ';
-            switch(event.error) {
-                case 'no-speech':
-                    errorMessage += 'No speech detected. Please try again.';
-                    break;
-                case 'audio-capture':
-                    errorMessage += 'Microphone not accessible. Please check permissions.';
-                    break;
-                case 'not-allowed':
-                    errorMessage += 'Microphone access denied. Please allow microphone access.';
-                    break;
-                case 'network':
-                    errorMessage += 'Network error. Please check your connection.';
-                    break;
-                default:
-                    errorMessage += event.error + '. Please try again.';
-            }
-            
-            transcriptionResult.innerHTML = `<span style="color: var(--ba-red);">${errorMessage}</span>`;
+            // Reset voice button on error
+            isRecording = false;
+            voiceButton.style.backgroundColor = '';
+            voiceButton.style.color = '';
+            voiceButton.querySelector('i').className = 'fas fa-microphone';
         };
     }
     
@@ -158,13 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
         voicePopupOverlay.classList.add('hidden');
     });
     
-    // Open voice popup
+    // Direct voice recording without popup
     voiceButton.addEventListener('click', function() {
-        voicePopup.classList.remove('hidden');
-        voicePopupOverlay.classList.remove('hidden');
-        chatInput.blur();
-        resetVoiceUI();
-        setTimeout(() => startRecording.focus(), 100);
+        if (!isRecording) {
+            startDirectVoiceRecording();
+        } else {
+            stopDirectVoiceRecording();
+        }
     });
     
     // Close voice popup handlers
@@ -299,6 +264,51 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    function startDirectVoiceRecording() {
+        if (!recognition) {
+            console.error('Speech recognition is not supported in your browser.');
+            return;
+        }
+        
+        try {
+            finalTranscript = '';
+            recognition.start();
+            isRecording = true;
+            isPaused = false;
+            
+            // Visual feedback on voice button
+            voiceButton.style.backgroundColor = '#dc3545';
+            voiceButton.style.color = 'white';
+            voiceButton.querySelector('i').className = 'fas fa-stop';
+            
+        } catch (e) {
+            console.error('Error starting recognition:', e);
+        }
+    }
+    
+    function stopDirectVoiceRecording() {
+        if (recognition && isRecording) {
+            recognition.stop();
+            isRecording = false;
+            isPaused = false;
+            
+            // Reset voice button appearance
+            voiceButton.style.backgroundColor = '';
+            voiceButton.style.color = '';
+            voiceButton.querySelector('i').className = 'fas fa-microphone';
+            
+            // Send the recorded message if we have text
+            setTimeout(() => {
+                const text = finalTranscript.trim();
+                if (text) {
+                    addMessage('user', text);
+                    processMessage(text, null, true); // true indicates voice input
+                }
+                finalTranscript = '';
+            }, 500);
+        }
+    }
+
     // Send message handlers
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', function(e) {

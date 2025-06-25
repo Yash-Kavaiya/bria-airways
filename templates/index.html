@@ -144,7 +144,7 @@
 
         /* Chat Panel with Theme Colors */
         .chat-panel {
-            width: 440px;
+            width: 600px;
             background: linear-gradient(145deg, #21365f, #1a2b4d);
             display: flex;
             flex-direction: column;
@@ -890,56 +890,25 @@
                                 interimTranscript += event.results[i][0].transcript;
                             }
                         }
-                        
-                        document.getElementById('transcriptionResult').innerHTML = `
-                            <span style="color: #333; font-weight: 600;">${this.finalTranscript}</span>
-                            <span style="color: #666; font-style: italic;">${interimTranscript}</span>
-                        `;
-                        
-                        const sendVoiceBtn = document.getElementById('sendVoice');
-                        if (this.finalTranscript.trim() !== '' || interimTranscript.trim() !== '') {
-                            sendVoiceBtn.disabled = false;
-                            document.getElementById('recordingStatus').innerHTML = 
-                                'Speech detected! <span style="color: #21365f;">✓</span>';
-                        } else {
-                            sendVoiceBtn.disabled = true;
-                        }
                     };
                     
                     this.recognition.onend = () => {
-                        if (this.isRecording && !this.isPaused) {
-                            try {
-                                this.recognition.start();
-                            } catch (e) {
-                                console.log('Recognition restart failed:', e);
-                                this.handleRecordingEnd();
-                            }
-                        } else {
-                            this.handleRecordingEnd();
+                        // For direct recording, don't restart automatically
+                        if (this.isRecording) {
+                            this.stopDirectVoiceRecording();
                         }
                     };
                     
                     this.recognition.onerror = (event) => {
                         console.error('Speech recognition error:', event.error);
-                        this.handleRecordingEnd();
                         
-                        let errorMessage = 'Error: ';
-                        switch(event.error) {
-                            case 'no-speech':
-                                errorMessage += 'No speech detected. Please try again.';
-                                break;
-                            case 'audio-capture':
-                                errorMessage += 'Microphone not accessible. Please check permissions.';
-                                break;
-                            case 'not-allowed':
-                                errorMessage += 'Microphone access denied. Please allow microphone access.';
-                                break;
-                            default:
-                                errorMessage += event.error + '. Please try again.';
-                        }
-                        
-                        document.getElementById('transcriptionResult').innerHTML = 
-                            `<span style="color: #c1333a;">${errorMessage}</span>`;
+                        // Reset voice button on error
+                        this.isRecording = false;
+                        const voiceBtn = document.getElementById('voiceBtn');
+                        voiceBtn.style.backgroundColor = '';
+                        voiceBtn.style.color = '';
+                        voiceBtn.classList.remove('recording');
+                        voiceBtn.querySelector('i').className = 'fas fa-microphone';
                     };
                 }
             }
@@ -986,9 +955,13 @@
                     this.showHelp();
                 });
 
-                // Voice controls
+                // Voice controls - Direct recording without popup
                 document.getElementById('voiceBtn').addEventListener('click', () => {
-                    this.openVoicePopup();
+                    if (!this.isRecording) {
+                        this.startDirectVoiceRecording();
+                    } else {
+                        this.stopDirectVoiceRecording();
+                    }
                 });
 
                 document.getElementById('closeVoicePopup').addEventListener('click', () => {
@@ -1426,6 +1399,55 @@
 • Flight status updates
 
 You can type your questions or use the voice button to speak to me!`, 'assistant');
+            }
+
+            startDirectVoiceRecording() {
+                if (!this.recognition) {
+                    console.error('Speech recognition is not supported in your browser.');
+                    return;
+                }
+                
+                try {
+                    this.finalTranscript = '';
+                    this.recognition.start();
+                    this.isRecording = true;
+                    this.isPaused = false;
+                    
+                    // Visual feedback on voice button
+                    const voiceBtn = document.getElementById('voiceBtn');
+                    voiceBtn.style.backgroundColor = '#c1333a';
+                    voiceBtn.style.color = 'white';
+                    voiceBtn.classList.add('recording');
+                    voiceBtn.querySelector('i').className = 'fas fa-stop';
+                    
+                } catch (e) {
+                    console.error('Error starting recognition:', e);
+                }
+            }
+
+            stopDirectVoiceRecording() {
+                if (this.recognition && this.isRecording) {
+                    this.recognition.stop();
+                    this.isRecording = false;
+                    this.isPaused = false;
+                    
+                    // Reset voice button appearance
+                    const voiceBtn = document.getElementById('voiceBtn');
+                    voiceBtn.style.backgroundColor = '';
+                    voiceBtn.style.color = '';
+                    voiceBtn.classList.remove('recording');
+                    voiceBtn.querySelector('i').className = 'fas fa-microphone';
+                    
+                    // Send the recorded message if we have text
+                    setTimeout(() => {
+                        const text = this.finalTranscript.trim();
+                        if (text) {
+                            this.addMessage(text, 'user', true);
+                            this.processMessage(text, null, true); // true indicates voice input
+                        }
+                        this.finalTranscript = '';
+                    }, 500);
+                }
             }
         }
 
