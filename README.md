@@ -800,27 +800,362 @@ Comprehensive testing approach ensuring reliability and user satisfaction.
 - **Security Metrics**: Vulnerability counts, security incident response times
 - **Accessibility Metrics**: WCAG compliance scores, assistive technology compatibility
 
+## 📈 Performance & Monitoring
+
+### ⚡ Performance Optimization
+
+#### Frontend Performance
+- **Asset Optimization**: Minified CSS and JavaScript files for faster loading
+- **Image Optimization**: Compressed images with appropriate formats (WebP, JPEG, PNG)
+- **Lazy Loading**: Deferred loading of non-critical resources
+- **Caching Strategies**: Browser caching for static assets and API responses
+- **Code Splitting**: Modular JavaScript loading for improved initial load times
+
+#### Backend Performance
+- **Database Optimization**: Efficient queries and connection pooling
+- **API Response Time**: Optimized DialogFlow integration with caching
+- **Memory Management**: Efficient memory usage and garbage collection
+- **Concurrent Processing**: Multi-threaded request handling
+- **Resource Monitoring**: CPU, memory, and disk usage tracking
+
+#### Network Performance
+- **CDN Integration**: Content delivery network for global performance
+- **Compression**: Gzip compression for text-based resources
+- **HTTP/2 Support**: Modern protocol for improved loading efficiency
+- **Connection Optimization**: Keep-alive connections and request pipelining
+- **DNS Optimization**: Fast DNS resolution with multiple providers
+
+### 📊 Monitoring & Analytics
+
+#### Application Monitoring
+- **Real-time Metrics**: Live monitoring of application performance and health
+- **Error Tracking**: Comprehensive error logging and alerting systems
+- **User Session Tracking**: Anonymous analytics for user behavior insights
+- **API Performance Monitoring**: DialogFlow response times and success rates
+- **Resource Usage Monitoring**: Server resource consumption tracking
+
+#### User Experience Analytics
+- **Page Performance**: Core Web Vitals tracking (LCP, FID, CLS)
+- **User Journey Analysis**: Funnel analysis for booking completion rates
+- **Device Performance**: Performance metrics across different devices and browsers
+- **Voice Interface Analytics**: Speech recognition accuracy and usage patterns
+- **Accessibility Monitoring**: Tracking of accessibility feature usage and effectiveness
+
+#### Business Intelligence
+- **Conversion Tracking**: Analysis of user interactions and goal completions
+- **Feature Usage**: Understanding which features are most valuable to users
+- **Geographic Analytics**: Performance and usage patterns across different regions
+- **Peak Load Analysis**: Understanding traffic patterns and capacity planning
+- **Customer Satisfaction**: User feedback and satisfaction score tracking
+
+### 🔧 Monitoring Tools & Services
+
+#### Development Environment
+- **Browser DevTools**: Built-in performance profiling and debugging
+- **Lighthouse**: Google's performance, accessibility, and SEO auditing
+- **WebPageTest**: Detailed performance analysis from multiple locations
+- **Local Performance Monitoring**: Development-time performance tracking
+
+#### Production Environment
+- **Application Performance Monitoring (APM)**: Real-time application monitoring
+- **Log Aggregation**: Centralized logging with search and analysis capabilities
+- **Uptime Monitoring**: 24/7 availability monitoring with alerting
+- **Security Monitoring**: Continuous security scanning and threat detection
+- **Synthetic Monitoring**: Automated testing of critical user journeys
+
+### 📋 Performance Benchmarks
+
+#### Target Performance Metrics
+- **First Contentful Paint (FCP)**: < 1.5 seconds
+- **Largest Contentful Paint (LCP)**: < 2.5 seconds
+- **First Input Delay (FID)**: < 100 milliseconds
+- **Cumulative Layout Shift (CLS)**: < 0.1
+- **Time to Interactive (TTI)**: < 3.5 seconds
+
+#### API Response Targets
+- **DialogFlow Response Time**: < 2 seconds for 95% of requests
+- **File Upload Processing**: < 5 seconds for files up to 16MB
+- **Page Load Time**: < 3 seconds on 3G connection
+- **Search Response Time**: < 1 second for flight search queries
+- **Voice Recognition Latency**: < 500 milliseconds for speech processing
+
+#### Reliability Targets
+- **Uptime**: 99.9% availability (8.77 hours downtime per year)
+- **Error Rate**: < 0.1% for critical user journeys
+- **Recovery Time**: < 5 minutes for service restoration
+- **Data Loss**: Zero tolerance for user data loss
+- **Security Incidents**: Zero successful security breaches
+
+### 🚨 Alerting & Incident Response
+
+#### Alerting Strategy
+- **Tiered Alerting**: Different severity levels for different types of issues
+- **Smart Alerting**: Machine learning-based anomaly detection
+- **Escalation Procedures**: Automatic escalation for unresolved issues
+- **Multiple Channels**: Email, SMS, and instant messaging alerts
+- **On-call Rotation**: 24/7 coverage for critical system monitoring
+
+#### Incident Response
+- **Response Time Targets**: Immediate response for critical issues
+- **Communication Plan**: Clear communication during incidents
+- **Post-incident Reviews**: Learning from incidents to prevent recurrence
+- **Documentation**: Detailed incident logs and resolution procedures
+- **Continuous Improvement**: Regular review and improvement of monitoring systems
+
 ## 👥 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions from developers, designers, and aviation enthusiasts! This project is open to improvements, bug fixes, and feature enhancements.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+### 🚀 How to Contribute
+
+#### Getting Started
+1. **Fork the Repository**: Create your own fork of the project
+2. **Clone Locally**: Clone your fork to your local development environment
+3. **Set Up Development Environment**: Follow the installation guide in this README
+4. **Explore the Codebase**: Familiarize yourself with the project structure and existing code
+
+#### Development Workflow
+1. **Create a Feature Branch**: 
+   - Use descriptive branch names like `feature/payment-integration` or `bugfix/chatbot-response-delay`
+   - Keep branches focused on single features or fixes
+
+2. **Code Development**:
+   - Follow existing code style and conventions
+   - Write clean, commented, and maintainable code
+   - Test your changes thoroughly in multiple browsers
+   - Ensure voice features work properly with Web Speech API
+
+3. **Testing Requirements**:
+   - Test all functionality before submitting
+   - Verify responsive design across different screen sizes
+   - Validate DialogFlow integration works correctly
+   - Check accessibility features and keyboard navigation
+
+4. **Documentation Updates**:
+   - Update relevant documentation for new features
+   - Add inline code comments for complex functionality
+   - Update README if adding new dependencies or setup steps
+
+#### Submission Process
+1. **Commit Guidelines**:
+   - Write clear, descriptive commit messages
+   - Use conventional commit format: `type(scope): description`
+   - Examples: `feat(chatbot): add voice response capabilities`
+
+2. **Pull Request Requirements**:
+   - Provide detailed description of changes made
+   - Include screenshots for UI/UX changes
+   - Reference any related issues or feature requests
+   - Ensure all tests pass and no new warnings are introduced
+
+3. **Code Review Process**:
+   - Respond promptly to review feedback
+   - Make requested changes in additional commits
+   - Maintain professional and constructive communication
+
+### 🎯 Contribution Areas
+
+#### 🐛 Bug Reports
+- **Issue Templates**: Use provided issue templates for consistent reporting
+- **Reproduction Steps**: Provide clear steps to reproduce the issue
+- **Environment Details**: Include browser, OS, and device information
+- **Screenshots**: Add screenshots or recordings when applicable
+
+#### 💡 Feature Requests
+- **Use Case Description**: Explain the problem your feature would solve
+- **User Stories**: Describe how users would interact with the feature
+- **Technical Considerations**: Discuss potential implementation approaches
+- **Design Mockups**: Include visual designs for UI changes (if applicable)
+
+#### 📖 Documentation Improvements
+- **Clarity Enhancements**: Improve unclear or outdated documentation
+- **Tutorial Creation**: Add step-by-step guides for complex features
+- **Code Examples**: Provide practical examples (following the no-code-in-README rule for main README)
+- **Translation**: Help with multi-language documentation
+
+#### 🔧 Technical Enhancements
+- **Performance Optimization**: Improve loading times and responsiveness
+- **Security Improvements**: Enhance security measures and best practices
+- **Accessibility**: Improve WCAG compliance and assistive technology support
+- **Browser Compatibility**: Ensure compatibility with additional browsers
+
+### 📋 Coding Standards
+
+#### Python (Backend)
+- Follow PEP 8 style guidelines
+- Use type hints where applicable
+- Write comprehensive docstrings for functions and classes
+- Implement proper error handling and logging
+- Maintain consistent indentation and formatting
+
+#### JavaScript (Frontend)
+- Use modern ES6+ syntax and features
+- Follow consistent naming conventions (camelCase)
+- Write modular, reusable code
+- Add JSDoc comments for complex functions
+- Ensure cross-browser compatibility
+
+#### HTML/CSS
+- Use semantic HTML5 elements
+- Follow BEM CSS methodology for class naming
+- Ensure responsive design principles
+- Maintain accessibility standards (WCAG 2.1 AA)
+- Optimize for performance and loading speed
+
+### 🤝 Community Guidelines
+
+#### Communication Standards
+- **Respectful Interaction**: Treat all contributors with respect and professionalism
+- **Constructive Feedback**: Provide helpful, actionable feedback in reviews
+- **Inclusive Environment**: Welcome contributors from all backgrounds and skill levels
+- **Professional Language**: Maintain professional communication in all interactions
+
+#### Collaboration Best Practices
+- **Clear Communication**: Be specific and clear in discussions and documentation
+- **Timely Responses**: Respond to questions and reviews in a reasonable timeframe
+- **Knowledge Sharing**: Share insights and learnings with the community
+- **Mentorship**: Help new contributors understand the codebase and processes
+
+### 🏆 Recognition
+
+#### Contributor Recognition
+- All contributors will be acknowledged in release notes
+- Significant contributors may be invited to join the core team
+- Outstanding contributions will be highlighted in project announcements
+- Annual recognition for top contributors and maintainers
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for complete details.
+
+### 📋 License Summary
+
+The MIT License is a permissive free software license that allows for:
+
+#### ✅ Permissions
+- **Commercial Use**: Use the software for commercial purposes
+- **Private Use**: Use the software for private projects
+- **Modification**: Modify the source code to suit your needs
+- **Distribution**: Distribute the original or modified software
+- **Patent Use**: Use any patents that contributors grant
+
+#### ❗ Conditions
+- **License Notice**: Include the original license notice in all copies
+- **Copyright Notice**: Preserve the original copyright notice
+
+#### 🚫 Limitations
+- **Liability**: The software is provided "as is" without warranty
+- **Warranty**: No warranty is provided for the software's functionality
+
+### 🔗 Third-Party Licenses
+
+This project uses several third-party libraries and services, each with their own licenses:
+
+#### Frontend Dependencies
+- **Font Awesome**: SIL Open Font License (Icons) / MIT License (CSS)
+- **Google Fonts**: SIL Open Font License
+- **Web Speech API**: Browser-native API (no additional license)
+
+#### Backend Dependencies
+- **Flask**: BSD-3-Clause License
+- **Google Cloud DialogFlow**: Google Cloud Terms of Service
+- **Python Standard Library**: Python Software Foundation License
+
+#### Development Tools
+- **Git**: GNU General Public License version 2
+- **Various Python Packages**: See requirements.txt for individual package licenses
+
+### ⚖️ Legal Compliance
+
+#### Usage Rights
+- This software may be used for both personal and commercial projects
+- No attribution is required in the final product (though appreciated)
+- You may create derivative works based on this project
+- You may distribute the software under the same or compatible license
+
+#### Intellectual Property
+- Original code and documentation are owned by the project contributors
+- Contributions become part of the project under the same license terms
+- Third-party assets and libraries retain their original licensing
 
 ## 🙏 Acknowledgements
 
-- British Airways for UI/UX inspiration
-- Google Cloud for DialogFlow CX platform
-- Font Awesome for icons
-- Open source community for various libraries and tools
+### 🌟 Inspiration & Design
+- **British Airways**: UI/UX design inspiration and user experience patterns
+- **Modern Airlines**: Industry best practices for digital customer experience
+- **Open Source Community**: Countless projects that influenced our technical decisions
+
+### 🛠️ Technology Partners
+- **Google Cloud Platform**: DialogFlow CX AI platform and cloud infrastructure
+- **Font Awesome**: Professional iconography and design elements
+- **Google Fonts**: Beautiful, web-optimized typography
+- **Python Software Foundation**: Python programming language and ecosystem
+- **Flask Development Team**: Lightweight, flexible web framework
+
+### 👨‍💻 Development Resources
+- **MDN Web Docs**: Comprehensive web development documentation
+- **Stack Overflow Community**: Problem-solving and technical guidance
+- **GitHub Open Source Projects**: Code examples and implementation patterns
+- **Web Accessibility Initiative**: Accessibility guidelines and best practices
+
+### 🧪 Testing & Quality Assurance
+- **Browser Vendors**: Cross-browser compatibility testing tools
+- **Accessibility Testing Tools**: WCAG compliance validation resources
+- **Performance Monitoring Services**: Speed and optimization insights
+- **Security Research Community**: Vulnerability detection and prevention guidance
+
+### 🎓 Educational Resources
+- **Online Learning Platforms**: Web development and AI integration tutorials
+- **Technical Documentation**: Framework and library documentation
+- **Developer Communities**: Forums, Discord servers, and technical discussions
+- **Conference Presentations**: Industry insights and emerging technology trends
+
+### 🤝 Special Thanks
+
+#### Core Contributors
+- **Project Maintainers**: Dedication to code quality and community building
+- **Feature Contributors**: Developers who added major functionality
+- **Bug Reporters**: Community members who identified and reported issues
+- **Documentation Writers**: Contributors who improved project documentation
+
+#### Community Support
+- **Early Adopters**: Users who provided feedback during development
+- **Beta Testers**: Volunteers who tested features before release
+- **Translators**: Community members working on internationalization
+- **Accessibility Advocates**: Contributors focused on inclusive design
+
+#### Industry Mentorship
+- **Aviation Industry Professionals**: Domain expertise and user experience insights
+- **AI/ML Researchers**: Guidance on conversational AI implementation
+- **Web Performance Experts**: Optimization techniques and best practices
+- **Security Professionals**: Security audit and vulnerability assessment guidance
 
 ---
 
-💡 **Note**: This is a demo project and not affiliated with or endorsed by British Airways.
+### 💡 Disclaimer
+
+**Important Notice**: This is a demonstration project created for educational and portfolio purposes. It is not affiliated with, endorsed by, or connected to British Airways or any other airline company. 
+
+#### Project Purpose
+- **Educational**: Showcase modern web development techniques and AI integration
+- **Portfolio**: Demonstrate full-stack development capabilities
+- **Open Source**: Contribute to the developer community with practical examples
+- **Learning**: Explore emerging technologies like DialogFlow CX and voice interfaces
+
+#### Usage Guidelines
+- This project should not be used for actual flight bookings or commercial airline operations
+- All airline branding and visual elements are used for demonstration purposes only
+- Users should not enter real personal or payment information
+- The AI chatbot is for demonstration and does not provide actual customer service
+
+#### Technical Limitations
+- DialogFlow integration requires proper Google Cloud configuration
+- Voice features require HTTPS in production environments
+- File upload functionality is for demonstration and has size/type restrictions
+- Real-time flight data integration would require additional API partnerships
+
+---
+
+**🚀 Ready to contribute?** Check out our [Contributing Guidelines](#-contributing) and join our community of developers building the future of airline customer experience!
+
+**📞 Need Help?** Open an issue, start a discussion, or reach out to the maintainers for guidance and support.
