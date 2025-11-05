@@ -39,6 +39,35 @@ The platform serves as a comprehensive solution for airline operations, offering
 - **Scalable Architecture**: Built to handle thousands of concurrent users
 - **Modern Design**: Clean, responsive interface optimized for all devices
 
+### ⚡ Quick Reference
+
+| What You Need | Information |
+|---------------|-------------|
+| **Live Demo** | `http://localhost:8080` (after installation) |
+| **Main Technology** | Flask 3.0.3 + Google DialogFlow CX + Python 3.8+ |
+| **Key Files** | `main.py` (Flask app), `dialogflow_api.py` (AI integration) |
+| **Installation Time** | ~10-15 minutes |
+| **Prerequisites** | Python 3.8+, Google Cloud account, DialogFlow CX enabled |
+| **Primary Features** | AI Chatbot, Voice Interface, Flight Booking, Trip Management |
+| **Deployment Options** | GCP (recommended), AWS, Azure, Heroku |
+| **License** | MIT (Free for commercial use) |
+| **Project Status** | ✅ Active Development - Phase 2 In Progress |
+
+### 📖 Legend
+
+Throughout this documentation, we use the following status indicators:
+
+| Icon | Meaning | Description |
+|------|---------|-------------|
+| ✅ | Completed | Feature is fully implemented and tested |
+| 🔄 | In Progress | Currently being developed |
+| 📋 | Planned | Scheduled for upcoming development |
+| ⏳ | Future | Long-term roadmap item |
+| 📅 | Scheduled | Has a defined target date |
+| 📈 | Growing | Metric is improving |
+| ⚠️ | Attention | Requires attention or has known issues |
+| 🔧 | Maintenance | Under maintenance or updates |
+
 ---
 
 ## 💼 Business Value
@@ -1243,12 +1272,30 @@ graph TB
 ### Production Configuration
 
 **Environment Variables:**
-```
+
+| Variable | Required | Default | Description | Example |
+|----------|----------|---------|-------------|---------|
+| `FLASK_ENV` | Yes | `development` | Flask environment mode | `production` |
+| `GOOGLE_APPLICATION_CREDENTIALS` | Yes | None | Path to Google Cloud service account JSON | `/app/credentials.json` |
+| `SECRET_KEY` | Yes | None | Flask secret key for sessions | `your-random-secret-key-here` |
+| `DATABASE_URL` | No | None | Database connection string (future) | `postgresql://user:pass@host/db` |
+| `PORT` | No | `8080` | Port number for the application | `8080` |
+| `MAX_CONTENT_LENGTH` | No | `16777216` | Max upload file size in bytes (16MB) | `16777216` |
+| `LOG_LEVEL` | No | `INFO` | Logging level | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+| `DIALOGFLOW_PROJECT_ID` | Yes | Set in code | Google Cloud project ID | `gen-ai-guru-gdg-pune` |
+| `DIALOGFLOW_LOCATION` | No | `global` | DialogFlow region | `global`, `us-central1`, `europe-west1` |
+| `DIALOGFLOW_AGENT_ID` | Yes | Set in code | DialogFlow agent identifier | `ffff32e4-24a6-44de-9450-2475f80cc583` |
+| `DIALOGFLOW_LANGUAGE` | No | `en-us` | Default language for conversations | `en-us`, `en-gb`, `es` |
+
+**Configuration Example:**
+```bash
+# .env file for production
 FLASK_ENV=production
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json
-SECRET_KEY=your-secret-key
-DATABASE_URL=your-database-url
+GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
+SECRET_KEY=your-random-secret-key-here
+PORT=8080
 MAX_CONTENT_LENGTH=16777216
+LOG_LEVEL=INFO
 ```
 
 **Web Server Setup:**
@@ -1512,6 +1559,27 @@ gantt
 
 ### Key Performance Indicators (KPIs)
 
+| Category | Metric | Target | Current | Status |
+|----------|--------|--------|---------|--------|
+| **Customer** | Monthly Active Users (MAU) | 10,000+ | Growing | 📈 |
+| **Customer** | Booking Conversion Rate | 12-15% | TBD | - |
+| **Customer** | Customer Satisfaction (CSAT) | 4.5+/5.0 | TBD | - |
+| **Customer** | Net Promoter Score (NPS) | 50+ | TBD | - |
+| **Customer** | Customer Retention Rate | 70%+ | TBD | - |
+| **Customer** | Average Booking Value | $500+ | TBD | - |
+| **Operational** | Chatbot Resolution Rate | 85%+ | TBD | - |
+| **Operational** | Average Response Time | <2 sec | ✅ <1 sec | ✅ |
+| **Operational** | API Uptime | 99.9% | TBD | - |
+| **Operational** | Page Load Time | <3 sec | ✅ <2 sec | ✅ |
+| **Operational** | Error Rate | <0.1% | TBD | - |
+| **Operational** | Support Ticket Reduction | 40%+ | TBD | - |
+| **Business** | Revenue Growth (MoM) | 20%+ | TBD | - |
+| **Business** | Customer Acquisition Cost | <$50 | TBD | - |
+| **Business** | Lifetime Value (LTV) | $2,000+ | TBD | - |
+| **Business** | ROI | 300%+ | TBD | - |
+| **Business** | Market Share | 2-5% | TBD | - |
+| **Business** | Profit Margin | 15-20% | TBD | - |
+
 **Customer Metrics:**
 - Monthly Active Users (MAU)
 - Booking conversion rate
@@ -1576,6 +1644,42 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 
 ---
 
+## 🔧 Troubleshooting
+
+### Common Issues and Solutions
+
+| Issue | Possible Cause | Solution |
+|-------|---------------|----------|
+| **DialogFlow Not Responding** | Missing credentials or incorrect project ID | Check `GOOGLE_APPLICATION_CREDENTIALS` environment variable and verify project ID in `dialogflow_api.py` |
+| **Port 8080 Already in Use** | Another application using the port | Use `lsof -i :8080` to find the process, kill it, or change port in `main.py` |
+| **Import Error: google.cloud** | DialogFlow library not installed | Run `pip install google-cloud-dialogflow-cx` |
+| **Voice Recognition Not Working** | Browser compatibility or HTTPS required | Use Chrome/Edge, ensure HTTPS (required for Web Speech API) |
+| **File Upload Fails** | File size exceeds 16MB limit | Reduce file size or modify `MAX_CONTENT_LENGTH` in `main.py` |
+| **Session Timeout** | Long idle period | Refresh the page to create a new session |
+| **Chatbot Returns Errors** | DialogFlow agent not configured | Complete DialogFlow setup steps in configuration section |
+| **Static Files Not Loading** | Incorrect static file path | Check `static/` folder structure and Flask configuration |
+| **Template Not Found** | Missing HTML template file | Verify all files in `templates/` directory exist |
+| **CORS Errors** | Cross-origin request blocked | Configure CORS settings in Flask for API endpoints |
+
+### Debug Mode
+
+Enable debug logging for troubleshooting:
+
+```python
+# In main.py, change logging level
+logging.basicConfig(level=logging.DEBUG)
+```
+
+### Getting More Help
+
+1. **Check the logs**: Review terminal output for error messages
+2. **Verify prerequisites**: Ensure all dependencies are installed
+3. **Test endpoints**: Use `/health` endpoint to verify server status
+4. **Review DialogFlow console**: Check agent configuration and test in simulator
+5. **GitHub Issues**: Search existing issues or create a new one with details
+
+---
+
 ## 📞 Support & Contact
 
 ### Getting Help
@@ -1584,6 +1688,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 - Check existing issues on GitHub
 - Search documentation
 - Review FAQ section
+- Review Troubleshooting section above
 - Create a new issue with details
 
 **Feature Requests:**
