@@ -621,7 +621,6 @@ graph LR
     L --> A
     M --> A
     N --> B
-    D --> J
     
     A --> O[Revenue]
     B --> O
@@ -812,10 +811,7 @@ stateDiagram-v2
     AudioFeedback --> EmailSummary: Send confirmation email
     EmailSummary --> [*]: Booking complete
     
-    note right of DialogFlow
-        Natural language processing
-        Context-aware conversations
-    end note
+    note right of DialogFlow: Natural language processing<br/>Context-aware conversations
 ```
 
 **Hands-Free Booking:**
