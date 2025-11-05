@@ -811,7 +811,7 @@ stateDiagram-v2
     AudioFeedback --> EmailSummary: Send confirmation email
     EmailSummary --> [*]: Booking complete
     
-    note right of DialogFlow: Natural language processing<br/>Context-aware conversations
+    note right of DialogFlow : Natural language processing<br/>Context-aware conversations
 ```
 
 **Hands-Free Booking:**
@@ -1278,9 +1278,9 @@ graph TB
 | `PORT` | No | `8080` | Port number for the application | `8080` |
 | `MAX_CONTENT_LENGTH` | No | `16777216` | Max upload file size in bytes (16MB) | `16777216` |
 | `LOG_LEVEL` | No | `INFO` | Logging level | `DEBUG`, `INFO`, `WARNING`, `ERROR` |
-| `DIALOGFLOW_PROJECT_ID` | Yes | Set in code | Google Cloud project ID | `gen-ai-guru-gdg-pune` |
+| `DIALOGFLOW_PROJECT_ID` | Yes | Set in code | Google Cloud project ID | `your-project-id` |
 | `DIALOGFLOW_LOCATION` | No | `global` | DialogFlow region | `global`, `us-central1`, `europe-west1` |
-| `DIALOGFLOW_AGENT_ID` | Yes | Set in code | DialogFlow agent identifier | `ffff32e4-24a6-44de-9450-2475f80cc583` |
+| `DIALOGFLOW_AGENT_ID` | Yes | Set in code | DialogFlow agent identifier | `your-agent-id-here` |
 | `DIALOGFLOW_LANGUAGE` | No | `en-us` | Default language for conversations | `en-us`, `en-gb`, `es` |
 
 **Configuration Example:**
@@ -1288,10 +1288,15 @@ graph TB
 # .env file for production
 FLASK_ENV=production
 GOOGLE_APPLICATION_CREDENTIALS=/app/credentials.json
-SECRET_KEY=your-random-secret-key-here
+SECRET_KEY=your-random-secret-key-here  # Generate with: python -c 'import secrets; print(secrets.token_hex(32))'
 PORT=8080
 MAX_CONTENT_LENGTH=16777216
 LOG_LEVEL=INFO
+```
+
+**⚠️ Security Note:** Always generate a cryptographically secure secret key for production:
+```bash
+python -c 'import secrets; print(secrets.token_hex(32))'
 ```
 
 **Web Server Setup:**
@@ -1647,7 +1652,7 @@ We welcome contributions from the community! Whether you're fixing bugs, adding 
 | Issue | Possible Cause | Solution |
 |-------|---------------|----------|
 | **DialogFlow Not Responding** | Missing credentials or incorrect project ID | Check `GOOGLE_APPLICATION_CREDENTIALS` environment variable and verify project ID in `dialogflow_api.py` |
-| **Port 8080 Already in Use** | Another application using the port | Use `lsof -i :8080` to find the process, kill it, or change port in `main.py` |
+| **Port 8080 Already in Use** | Another application using the port | **Linux/Mac**: `lsof -i :8080`, **Windows**: `netstat -ano \| findstr :8080`, or change port in `main.py` |
 | **Import Error: google.cloud** | DialogFlow library not installed | Run `pip install google-cloud-dialogflow-cx` |
 | **Voice Recognition Not Working** | Browser compatibility or HTTPS required | Use Chrome/Edge, ensure HTTPS (required for Web Speech API) |
 | **File Upload Fails** | File size exceeds 16MB limit | Reduce file size or modify `MAX_CONTENT_LENGTH` in `main.py` |
